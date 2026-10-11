@@ -1,0 +1,191 @@
+---
+import Base from '../layouts/Base.astro';
+import DecisionTree from '../components/DecisionTree.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { SITE } from '../config';
+import { services, alternatives } from '../data/services';
+import { getCollection } from 'astro:content';
+const posts = (await getCollection('blog')).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf()).slice(0, 2);
+const fmt = (d: Date) => d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
+---
+<Base>
+  <!-- Hero -->
+  <section class="hero grain band-black">
+    <div class="hero-bg" aria-hidden="true"></div>
+    <div class="wrap hero-grid">
+      <div class="load-in">
+        <p class="kicker">Sales automation for SDR teams, built by an operator</p>
+        <h1 class="display" aria-label="Your sales process lives in people’s heads. AI can’t automate that.">
+          <span aria-hidden="true">Your</span>
+          <span class="rotator" aria-hidden="true" data-words="sales process|lead routing|lead scoring|follow-up|playbook|research"><span class="word on">sales process</span></span>
+          <span aria-hidden="true" class="tail">lives in people’s heads.</span>
+          <span aria-hidden="true" class="tail">AI can’t automate that.</span>
+        </h1>
+        <p class="lede">KML writes down how your team actually sells, then builds the automation inside the tools you already pay for.</p>
+        <div class="cta-row">
+          <a class="btn btn-signal" href={SITE.bookingUrl} target="_blank" rel="noopener" data-cta="hero">Book a 30-minute call</a>
+          <a class="btn btn-ghost" href="/services">See services</a>
+        </div>
+      </div>
+      <DecisionTree />
+    </div>
+  </section>
+
+  <!-- Problem -->
+  <section class="band band-white" id="problem">
+    <div class="wrap split">
+      <h2 class="h2">Ask five reps how they work a new lead. You’ll get five answers.</h2>
+      <div>
+        <ul class="pains">
+          <li><strong>Software can’t copy a process nobody wrote down.</strong><span>Point an AI tool at five versions of the process and it invents a sixth.</span></li>
+          <li><strong>Nobody decided where a rep has to step in.</strong><span>So reps ignore the tool, or send whatever it drafts without reading it.</span></li>
+        </ul>
+        <p class="agitate">The pilot gets cut at renewal, and the board still asks why pipeline didn’t move.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Alternatives -->
+  <section class="band band-graphite" id="alternatives">
+    <div class="wrap">
+      <h2 class="h2 section-title">The usual fixes, and where they stall</h2>
+      <div class="alts">
+        {alternatives.map((a) => (
+          <div class="alt"><h3>{a.name}</h3><p>{a.why}</p></div>
+        ))}
+        <div class="alt alt-kml">
+          <h3>Work with KML</h3>
+          <p>An operator writes down how your reps actually work, then builds the automation in your CRM.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Fit -->
+  <section class="band band-light" id="fit">
+    <div class="wrap">
+      <h2 class="h2 section-title">Who this is for</h2>
+      <div class="fit-cols">
+        <div>
+          <h3>A fit if</h3>
+          <ul class="facts">
+            <li>You lead an SDR team, and leadership wants AI in the sales process.</li>
+            <li>You bought an AI tool, and your reps barely use it.</li>
+          </ul>
+        </div>
+        <div class="fit-no">
+          <h3>Not a fit if</h3>
+          <ul class="facts">
+            <li>You want someone to send cold email for you.</li>
+            <li>You want a strategy deck with no build behind it.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section class="band band-black" id="services">
+    <div class="wrap">
+      <div class="svc-intro">
+        <h2 class="h2">Start with the map</h2>
+        <p class="lede">Every other engagement builds on it.</p>
+      </div>
+      <div>
+        {services.map((s) => (
+          <article class="svc">
+            <div>
+              <p class="svc-tag">{s.tag}</p>
+              <h3>{s.name}</h3>
+              <p class="for">{s.short}</p>
+              <a class="svc-link" href={`/services#${s.slug}`}>Details</a>
+            </div>
+            <ul>{s.outcomes.slice(0, 2).map((o) => <li>{o}</li>)}</ul>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Operator -->
+  <section class="band band-white" id="about">
+    <div class="wrap operator">
+      <div class="seal" aria-hidden="true"><img src="/brand/kml-circular-white.svg" alt="" width="420" height="420" /></div>
+      <div>
+        <h2 class="h2">Built by someone running an SDR team today</h2>
+        <p class="lede" style="margin-top:24px">I’m Keith. I lead SDR teams selling into enterprise and contact center accounts, and I build the tools my reps use.</p>
+        <ul class="facts">
+          <li>Every recommendation gets tested on a team carrying quota this quarter.</li>
+          <li><a href="/apps">Tempo</a>, my text expansion extension for reps, is live on the Chrome Web Store.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tempo -->
+  <section class="band band-graphite" id="tempo">
+    <div class="wrap">
+      <div class="app-feature">
+        <div>
+          <div class="app-meta">
+            <svg class="app-icon" viewBox="0 0 72 72" aria-hidden="true"><rect width="72" height="72" rx="18" fill="#000"/><path d="M22 22h28v6H39v24h-6V28H22z" fill="#fff"/></svg>
+            <div><div class="name">Tempo</div><div class="by">Free Chrome extension</div></div>
+          </div>
+          <h2 class="h3" style="max-width:20ch">Type @@ to drop in a template, then fill in the details.</h2>
+          <div class="cta-row" style="margin-top:32px">
+            <a class="btn btn-signal" href={SITE.tempoUrl} target="_blank" rel="noopener" data-cta="tempo-home">Add Tempo to Chrome</a>
+            <a class="btn btn-ghost" href="/apps">All apps</a>
+          </div>
+        </div>
+        <div class="typer" aria-hidden="true">
+          <div class="bar"><i></i><i></i><i></i></div>
+          <div class="to">To: jordan@acme.com</div>
+          <p style="margin:0 0 12px">Hey, <span class="field">Jordan</span> -</p>
+          <p style="margin:0 0 12px">Saw <span class="field">Acme</span> opened a second contact center.</p>
+          <p style="margin:0">How are new leads getting assigned across both sites? <span class="trigger">@@meeting</span><span class="caret"></span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Blog -->
+  {posts.length > 0 && (
+    <section class="band band-light" id="blog">
+      <div class="wrap">
+        <div class="svc-intro" style="margin-bottom:32px">
+          <h2 class="h2">From the blog</h2>
+          <a class="btn btn-ink btn-sm" href="/blog">All posts</a>
+        </div>
+        <div class="posts">
+          {posts.map((p) => (
+            <a class="post-row" href={`/blog/${p.id}`}>
+              <time datetime={p.data.date.toISOString()}>{fmt(p.data.date)}</time>
+              <div><h3>{p.data.title}</h3><p>{p.data.description}</p></div>
+              <span class="read">{p.data.readMinutes ?? 5} min read</span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <CtaBand />
+
+  <script is:inline>
+    (function () {
+      var r = document.querySelector('.rotator'); if (!r) return;
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      var words = r.dataset.words.split('|'), i = 0, w = r.querySelector('.word');
+      setInterval(function () {
+        w.classList.add('out');
+        setTimeout(function () {
+          i = (i + 1) % words.length;
+          w.textContent = words[i];
+          w.classList.remove('out'); w.classList.add('below');
+          void w.offsetWidth;
+          w.classList.remove('below');
+        }, 500);
+      }, 3000);
+    })();
+  </script>
+</Base>

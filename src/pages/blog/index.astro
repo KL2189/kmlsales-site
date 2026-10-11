@@ -1,0 +1,30 @@
+---
+import Base from '../../layouts/Base.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import { getCollection } from 'astro:content';
+const posts = (await getCollection('blog')).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const fmt = (d: Date) => d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
+---
+<Base title="Blog" description="Field notes on sales process, decision trees, SDR leadership, and making revenue teams AI-native.">
+  <section class="page-hero grain band-black">
+    <div class="hero-bg" aria-hidden="true"></div>
+    <div class="wrap load-in">
+      <h1 class="display">Field notes from the sales floor.</h1>
+      <p class="lede">Notes on sales process and automation from someone still running an SDR team.</p>
+    </div>
+  </section>
+  <section class="band band-black" style="padding-top:0">
+    <div class="wrap">
+      <div class="posts">
+        {posts.map((p) => (
+          <a class="post-row" href={`/blog/${p.id}`}>
+            <time datetime={p.data.date.toISOString()}>{fmt(p.data.date)}</time>
+            <div><h2 class="h3" style="font-size:clamp(1.35rem,2.4vw,1.85rem)">{p.data.title}</h2><p>{p.data.description}</p></div>
+            <span class="read">{p.data.readMinutes ?? 5} min read</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+  <CtaBand />
+</Base>

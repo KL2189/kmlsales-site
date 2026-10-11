@@ -1,0 +1,35 @@
+---
+import Base from '../layouts/Base.astro';
+import LeadForm from '../components/LeadForm.astro';
+import { SITE } from '../config';
+---
+<Base title="Contact" description="Book a 30-minute call with KML Sales or send a message about your sales process, outbound motion, or automation plans.">
+  <section class="page-hero grain band-black" style="padding-bottom:40px">
+    <div class="hero-bg" aria-hidden="true"></div>
+    <div class="wrap load-in">
+      <h1 class="display">Bring the task that eats your team’s week.</h1>
+      <p class="lede">Book a call, or send a message if you’d rather start in writing.</p>
+    </div>
+  </section>
+  <section class="band band-black" style="padding-top:10px">
+    <div class="wrap contact-grid">
+      <div class="panel panel-signal grain" style="position:relative">
+        <h2 class="h3">Book a 30-minute call</h2>
+        <p class="muted" style="margin:16px 0 24px">Pick one task that slows your reps down. You’ll leave with a first-draft decision tree for it.</p>
+        <a class="btn btn-signal" href={SITE.bookingUrl} target="_blank" rel="noopener" data-cta="contact-book">Book a call</a>
+        <p class="cta-note">Or email <a href={`mailto:${SITE.email}`}>{SITE.email}</a></p>
+      </div>
+      <div class="panel">
+        <h2 class="h3" style="margin-bottom:22px">Send a message</h2>
+        <LeadForm />
+      </div>
+    </div>
+  </section>
+  <script is:inline>
+    (function () {
+      var map = { 'process-map': 'Process map and automation plan', 'automation-build': 'Automation build', 'outbound-system': 'Building or rebuilding outbound / SDR', 'sdr-coaching': 'Coaching for SDR leaders' };
+      var s = new URLSearchParams(location.search).get('service'); var el = document.getElementById('f-svc');
+      if (s && map[s] && el) el.value = map[s];
+    })();
+  </script>
+</Base>

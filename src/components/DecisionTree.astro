@@ -1,0 +1,58 @@
+---
+type Kind = 'auto' | 'assist' | 'human' | 'decide';
+const W = 184, H = 56;
+const nodes: { id: string; x: number; y: number; label: string; sub: string; kind: Kind; d: number }[] = [
+  { id: 'a', x: 260, y: 36, label: 'New lead assigned', sub: 'Trigger', kind: 'auto', d: 0.1 },
+  { id: 'b', x: 260, y: 128, label: 'Research account', sub: 'Automate', kind: 'auto', d: 0.45 },
+  { id: 'c', x: 260, y: 220, label: 'Fits ICP + shows intent?', sub: 'Decision rule', kind: 'decide', d: 0.8 },
+  { id: 'd', x: 116, y: 322, label: 'Nurture sequence', sub: 'Automate', kind: 'auto', d: 1.15 },
+  { id: 'e', x: 404, y: 322, label: 'Draft first touch', sub: 'Assist', kind: 'assist', d: 1.15 },
+  { id: 'f', x: 116, y: 414, label: 'Re-score in 30 days', sub: 'Automate', kind: 'auto', d: 1.5 },
+  { id: 'g', x: 404, y: 414, label: 'Rep edits and sends', sub: 'Human', kind: 'human', d: 1.5 },
+];
+const edges = [
+  { d: 'M260 64 V100', delay: 0.3 },
+  { d: 'M260 156 V192', delay: 0.65 },
+  { d: 'M220 248 C 180 270, 116 270, 116 294', delay: 1.0, label: 'No', lx: 160, ly: 272 },
+  { d: 'M300 248 C 340 270, 404 270, 404 294', delay: 1.0, label: 'Yes', lx: 362, ly: 272 },
+  { d: 'M116 350 V386', delay: 1.35 },
+  { d: 'M404 350 V386', delay: 1.35 },
+];
+const stroke = { auto: 'rgba(255,255,255,.9)', assist: 'rgba(255,255,255,.35)', human: '#ffffff', decide: 'rgba(255,255,255,.5)' } as const;
+const fill = { auto: 'url(#autoFill)', assist: '#3a3a3a', human: 'rgba(0,0,0,.35)', decide: 'rgba(255,255,255,.03)' } as const;
+const textColor = { auto: '#000000', assist: '#ffffff', human: '#ffffff', decide: '#ffffff' } as const;
+const tagColor = { auto: '#3a3a3a', assist: '#c9c9c9', human: '#c9c9c9', decide: '#9a9a9a' } as const;
+---
+<div class="tree-card grain">
+  <div class="tree-head">
+    <span class="tree-title">Inbound lead routing</span>
+    <div class="legend" aria-hidden="true">
+      <span><i class="l-auto"></i>Automate</span><span><i class="l-assist"></i>Assist</span><span><i class="l-human"></i>Human</span>
+    </div>
+  </div>
+  <div class="tree">
+    <svg viewBox="0 0 520 456" role="img" aria-labelledby="treeTitle treeDesc">
+      <title id="treeTitle">Example sales decision tree</title>
+      <desc id="treeDesc">A new lead is assigned and researched automatically. A decision rule checks ICP fit and intent. If no, the lead enters an automated nurture sequence and is re-scored in 30 days. If yes, AI drafts the first touch and a rep edits and sends it.</desc>
+      <defs>
+        <linearGradient id="chromeStroke" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#7a7a7a"/></linearGradient>
+        <linearGradient id="autoFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#d4d4d4"/></linearGradient>
+      </defs>
+      {edges.map((e) => (
+        <g>
+          <path class="edge" d={e.d} style={`animation-delay:${e.delay}s`} />
+          {e.label && <text x={e.lx} y={e.ly} text-anchor="middle" font-size="10.5" fill="#9a9a9a" font-family="Inter, sans-serif" class="node" style={`animation-delay:${e.delay + 0.2}s`}>{e.label}</text>}
+        </g>
+      ))}
+      {nodes.map((n) => (
+        <g class="node" style={`animation-delay:${n.d}s`}>
+          <rect x={n.x - W / 2} y={n.y - H / 2} width={W} height={H} rx={n.kind === 'decide' ? 28 : 12}
+            fill={fill[n.kind]} stroke={stroke[n.kind]} stroke-width={n.kind === 'human' ? 1.6 : 1.3}
+            stroke-dasharray={n.kind === 'decide' ? '4 4' : undefined} />
+          <text x={n.x} y={n.y - 3} text-anchor="middle" style={`fill:${textColor[n.kind]}`}>{n.label}</text>
+          <text x={n.x} y={n.y + 14} text-anchor="middle" class="sub tag" fill={tagColor[n.kind]} style={`fill:${tagColor[n.kind]}`}>{n.sub}</text>
+        </g>
+      ))}
+    </svg>
+  </div>
+</div>

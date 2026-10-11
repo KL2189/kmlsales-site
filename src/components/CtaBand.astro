@@ -1,0 +1,17 @@
+---
+import { SITE } from '../config';
+interface Props { title?: string; body?: string; }
+const { title = 'Find out what to automate first.', body = 'Bring one task that eats your reps’ week. You’ll leave with a first draft of what software should handle.' } = Astro.props;
+---
+<section class="band band-black cta-wrap">
+  <div class="wrap">
+    <div class="cta-band grain">
+      <h2 class="h2">{title}</h2>
+      <p>{body}</p>
+      <div class="cta-row">
+        <a class="btn btn-signal" href={SITE.bookingUrl} target="_blank" rel="noopener" data-cta="band">Book a 30-minute call</a>
+        <a class="btn btn-ghost" href="/contact">Send a message</a>
+      </div>
+    </div>
+  </div>
+</section>

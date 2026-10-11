@@ -1,0 +1,53 @@
+---
+import Base from '../layouts/Base.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { services } from '../data/services';
+import { SITE } from '../config';
+const faqs = [
+  { q: 'How is this different from buying an AI SDR tool?', a: 'An AI tool runs whatever steps you give it. The map decides which steps it should run, so the tool actually gets used.' },
+  { q: 'How is this different from a consultancy?', a: 'A consultancy hands you a deck. KML builds the automation in your CRM and sequencer.' },
+  { q: 'Do I need to know what I want before we talk?', a: 'No. The first call finds the one workflow worth fixing first.' },
+  { q: 'How is pricing set?', a: 'Each engagement is scoped and priced after the first call, before any work starts.' },
+];
+---
+<Base title="Services" description="Start with a map of how your team sells. Then build the automation, the outbound system, or the SDR leadership around it.">
+  <section class="page-hero grain band-black">
+    <div class="hero-bg" aria-hidden="true"></div>
+    <div class="wrap load-in">
+      <h1 class="display">Start with a map of how your team sells.</h1>
+      <p class="lede">Every other engagement builds on it.</p>
+      <div class="cta-row" style="margin-top:36px">
+        <a class="btn btn-signal" href={SITE.bookingUrl} target="_blank" rel="noopener" data-cta="services-hero">Book a 30-minute call</a>
+      </div>
+    </div>
+  </section>
+
+  {services.map((s, i) => (
+    <section class={`band ${['band-white', 'band-graphite', 'band-light', 'band-black'][i % 4]}`} id={s.slug}>
+      <div class="wrap svc svc-page">
+        <div>
+          <p class="svc-tag">{s.tag}</p>
+          <h2 class="h2">{s.name}</h2>
+          <p class="lede" style="margin-top:20px">{s.problem}</p>
+          <p class="for">{s.how}</p>
+        </div>
+        <div>
+          <h3 class="list-title">What you get</h3>
+          <ul>{s.outcomes.map((o) => <li>{o}</li>)}</ul>
+          <a class="btn btn-ghost btn-sm" style="margin-top:32px" href={`/contact?service=${s.slug}`}>Ask about this</a>
+        </div>
+      </div>
+    </section>
+  ))}
+
+  <section class="band band-white">
+    <div class="wrap" style="max-width:900px">
+      <h2 class="h2 section-title">Common questions</h2>
+      <div class="faq">
+        {faqs.map((f) => <details><summary>{f.q}</summary><p>{f.a}</p></details>)}
+      </div>
+    </div>
+  </section>
+
+  <CtaBand />
+</Base>

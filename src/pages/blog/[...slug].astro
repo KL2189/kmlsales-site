@@ -1,0 +1,26 @@
+---
+import Base from '../../layouts/Base.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import { getCollection, render } from 'astro:content';
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((p) => ({ params: { slug: p.id }, props: { post: p } }));
+}
+const { post } = Astro.props;
+const { Content } = await render(post);
+const date = post.data.date.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
+const ld = { '@context': 'https://schema.org', '@type': 'BlogPosting', headline: post.data.title, description: post.data.description, datePublished: post.data.date.toISOString(), author: { '@type': 'Person', name: 'Keith' }, publisher: { '@type': 'Organization', name: 'KML Sales' }, mainEntityOfPage: new URL(`/blog/${post.id}`, Astro.site).href };
+---
+<Base title={post.data.title} description={post.data.description} type="article" jsonld={ld}>
+  <article class="wrap">
+    <div class="article">
+      <header class="article-head load-in">
+        <a href="/blog" class="muted" style="text-decoration:none;font-size:.95rem">Back to the blog</a>
+        <h1 class="display" style="margin-top:22px">{post.data.title}</h1>
+        <p class="meta">Keith, KML Sales &nbsp;/&nbsp; {date} &nbsp;/&nbsp; {post.data.readMinutes ?? 5} min read</p>
+      </header>
+      <div class="prose"><Content /></div>
+    </div>
+  </article>
+  <CtaBand />
+</Base>

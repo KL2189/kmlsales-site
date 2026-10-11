@@ -1,0 +1,60 @@
+---
+import Base from '../layouts/Base.astro';
+import { SITE } from '../config';
+---
+<Base title="Apps" description="Sales tools built by KML Sales. Download Tempo, the text expansion Chrome extension for sales reps, and get notified when new apps launch.">
+  <section class="page-hero grain band-black">
+    <div class="hero-bg" aria-hidden="true"></div>
+    <div class="wrap load-in">
+      <h1 class="display">Tools for reps, built by someone who manages them.</h1>
+      <p class="lede">Each one removes a step from a rep’s day.</p>
+    </div>
+  </section>
+
+  <section class="band band-black" style="padding-top:10px">
+    <div class="wrap">
+      <div class="app-feature grain">
+        <div>
+          <div class="app-meta">
+            <svg class="app-icon" viewBox="0 0 72 72" aria-hidden="true"><rect width="72" height="72" rx="18" fill="#000"/><path d="M22 22h28v6H39v24h-6V28H22z" fill="#fff"/></svg>
+            <div><h2 class="name" style="font-family:var(--serif);font-weight:400">Tempo</h2><div class="by">Text expansion for sales</div></div>
+          </div>
+          <ul class="facts" style="margin:0 0 30px">
+            <li>Type <strong>@@</strong> in any text box to pull up your templates.</li>
+            <li>Fill in the blanks before you send, so no email goes out with {'{{first_name}}'} in it.</li>
+          </ul>
+          <div class="cta-row">
+            <a class="btn btn-signal" href={SITE.tempoUrl} target="_blank" rel="noopener" data-cta="tempo-apps">Add Tempo to Chrome</a>
+          </div>
+          
+        </div>
+        <div class="typer" aria-hidden="true">
+          <div class="bar"><i></i><i></i><i></i></div>
+          <div class="to">LinkedIn message to Priya Shah</div>
+          <p style="margin:0 0 12px">Hey, <span class="field">Priya</span> -</p>
+          <p style="margin:0 0 12px">Congrats on the move to <span class="field">VP Sales</span>.</p>
+          <p style="margin:0">What’s the first part of the sales process you plan to write down? <span class="trigger">@@intro</span><span class="caret"></span></p>
+        </div>
+      </div>
+
+      <div class="lab-grid">
+        <div class="lab">
+          <h3>Next app in the lab</h3>
+          <p>Another tool for reps is in private beta.</p>
+        </div>
+        <div class="lab">
+          <h3>Get new apps first</h3>
+          <p>New apps and the KML newsletter. Unsubscribe anytime.</p>
+          <form class="inline-form" name="newsletter" method="POST" action="/" data-netlify="true" netlify-honeypot="bot-field" data-ajax data-ok="You’re on the list.">
+            <input type="hidden" name="form-name" value="newsletter" /><input type="hidden" name="source" value="apps" />
+            <p style="position:absolute;left:-9999px"><label>Leave this empty <input name="bot-field" tabindex="-1" autocomplete="off" /></label></p>
+            <label for="n-email" class="skip" style="position:absolute;left:-9999px">Email</label>
+            <input id="n-email" type="email" name="email" placeholder="you@company.com" autocomplete="email" required />
+            <button class="btn btn-signal" type="submit">Notify me</button>
+            <p class="form-status" role="status" aria-live="polite" style="flex-basis:100%"></p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>

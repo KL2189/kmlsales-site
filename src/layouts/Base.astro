@@ -1,0 +1,125 @@
+---
+import '../styles/global.css';
+import { SITE } from '../config';
+interface Props { title?: string; description?: string; path?: string; type?: string; jsonld?: object; }
+const { title, description = SITE.description, type = 'website', jsonld } = Astro.props;
+const fullTitle = title ? `${title} | KML Sales` : 'KML Sales | Sales automation for SDR teams, built by an operator';
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const current = Astro.url.pathname.replace(/\/$/, '') || '/';
+const nav = [
+  { href: '/services', label: 'Services' },
+  { href: '/apps', label: 'Apps' },
+  { href: '/blog', label: 'Blog' },
+  { href: '/contact', label: 'Contact' },
+];
+const org = {
+  '@context': 'https://schema.org', '@type': 'ProfessionalService', name: 'KML Sales', url: 'https://kmlsales.com',
+  email: SITE.email, description: SITE.description, logo: 'https://kmlsales.com/brand/kml-stacked-white.svg',
+  founder: { '@type': 'Person', name: 'Keith' },
+  areaServed: 'Worldwide',
+  serviceType: ['Sales process mapping and automation planning', 'Sales automation build', 'Outbound and SDR system build', 'SDR leadership coaching'],
+};
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{fullTitle}</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href={canonical} />
+  <meta name="theme-color" content="#000000" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="alternate" type="application/rss+xml" title="KML Sales Blog" href="/rss.xml" />
+  <meta property="og:type" content={type} />
+  <meta property="og:title" content={fullTitle} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url" content={canonical} />
+  <meta property="og:image" content="https://kmlsales.com/og.png" />
+  <meta property="og:site_name" content="KML Sales" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={fullTitle} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content="https://kmlsales.com/og.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+  <script type="application/ld+json" set:html={JSON.stringify(jsonld ?? org)} />
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="site-header" id="top">
+    <div class="wrap nav">
+      <a class="brand" href="/" aria-label="KML Sales home"><img src="/brand/kml-horizontal-white.svg" alt="KML Sales Fundamentals" width="181" height="46" /></a>
+      <button class="menu-toggle" aria-expanded="false" aria-controls="nav-links" aria-label="Open menu">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M3 6h14M3 10h14M3 14h14"/></svg>
+      </button>
+      <ul class="nav-links" id="nav-links">
+        {nav.map((n) => <li><a href={n.href} aria-current={current.startsWith(n.href) ? 'page' : undefined}>{n.label}</a></li>)}
+        <li><a class="btn btn-signal btn-sm" href={SITE.bookingUrl} target="_blank" rel="noopener" data-cta="header">Book a call</a></li>
+      </ul>
+    </div>
+  </header>
+  <main id="main"><slot /></main>
+  <hr class="rule-signal" />
+  <footer class="site-footer" style="margin-top:0">
+    <div class="wrap">
+      <div class="foot-grid">
+        <div>
+          <img src="/brand/kml-stacked-white.svg" alt="KML Sales Fundamentals" width="210" height="101" />
+          <p class="muted" style="max-width:34ch;margin-top:16px">Sales automation for SDR teams, built by an operator.</p>
+        </div>
+        <div>
+          <h4>Site</h4>
+          <ul>{nav.map((n) => <li><a href={n.href}>{n.label}</a></li>)}</ul>
+        </div>
+        <div>
+          <h4>Newsletter</h4>
+          <p class="muted" style="margin:0 0 14px;font-size:.95rem">Notes on sales process and automation. Unsubscribe anytime.</p>
+          <form class="foot-form" name="newsletter" method="POST" action="/" data-netlify="true" netlify-honeypot="bot-field" data-ajax data-ok="You’re subscribed.">
+            <input type="hidden" name="form-name" value="newsletter" /><input type="hidden" name="source" value="footer" />
+            <p style="position:absolute;left:-9999px"><label>Leave this empty <input name="bot-field" tabindex="-1" autocomplete="off" /></label></p>
+            <label for="foot-email" style="position:absolute;left:-9999px">Email</label>
+            <input id="foot-email" type="email" name="email" placeholder="you@company.com" autocomplete="email" required />
+            <button class="btn btn-signal btn-sm" type="submit">Subscribe</button>
+            <p class="form-status" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+        <div>
+          <h4>Get in touch</h4>
+          <ul>
+            <li><a href={SITE.bookingUrl} target="_blank" rel="noopener">Book a call</a></li>
+            <li><a href={`mailto:${SITE.email}`}>{SITE.email}</a></li>
+            <li><a href="/rss.xml">Blog RSS</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="foot-base"><span>© {new Date().getFullYear()} KML Sales</span><a href="#top" style="text-decoration:none">Back to top</a></div>
+    </div>
+  </footer>
+  <script is:inline>
+    (function () {
+      var h = document.querySelector('.site-header');
+      var onS = function () { h && h.classList.toggle('scrolled', window.scrollY > 8); };
+      onS(); window.addEventListener('scroll', onS, { passive: true });
+      var t = document.querySelector('.menu-toggle'), l = document.getElementById('nav-links');
+      if (t && l) t.addEventListener('click', function () {
+        var o = l.classList.toggle('open'); t.setAttribute('aria-expanded', String(o)); t.setAttribute('aria-label', o ? 'Close menu' : 'Open menu');
+      });
+      document.querySelectorAll('form[data-ajax]').forEach(function (f) {
+        f.addEventListener('submit', function (e) {
+          e.preventDefault();
+          var s = f.querySelector('.form-status'), b = f.querySelector('button[type=submit]');
+          var label = b.textContent;
+          b.disabled = true; b.textContent = 'Sending…'; s.className = 'form-status'; s.textContent = '';
+          fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: new URLSearchParams(new FormData(f)).toString() })
+            .then(function (r) { if (!r.ok) throw new Error('x'); })
+            .then(function () { s.className = 'form-status ok'; s.textContent = f.dataset.ok || 'Sent.'; f.reset(); })
+            .catch(function () { s.className = 'form-status err'; s.innerHTML = 'That didn’t go through. Email <a href="mailto:keith@kmlsales.com">keith@kmlsales.com</a> directly.'; })
+            .finally(function () { b.disabled = false; b.textContent = label; });
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
