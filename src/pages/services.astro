@@ -4,18 +4,18 @@ import CtaBand from '../components/CtaBand.astro';
 import { services } from '../data/services';
 import { SITE } from '../config';
 const faqs = [
-  { q: 'How is this different from buying an AI SDR tool?', a: 'An AI tool runs whatever steps you give it. The map decides which steps it should run, so the tool actually gets used.' },
+  { q: 'How is this different from buying another automation tool?', a: 'An AI tool runs whatever steps you give it. The map decides which steps it should run, so the tool actually gets used.' },
   { q: 'Who implements the design?', a: 'Your RevOps team can implement the design. KML implementation and support are scoped separately.' },
   { q: 'Do I need to know what I want before we talk?', a: 'No. The first call finds the one workflow worth fixing first.' },
   { q: 'How is pricing set?', a: 'Each engagement is scoped and priced after the first call, before any work starts.' },
 ];
 ---
-<Base title="Services" description="Get a sales process map with decision rules, failure handling, and acceptance checks. Implementation and support are scoped separately.">
+<Base title="Services" description="Get a GTM workflow map with decision rules, failure handling, and acceptance checks. Implementation and support are scoped separately.">
   <section class="page-hero grain band-black">
     <div class="hero-bg" aria-hidden="true"></div>
     <div class="wrap load-in">
-      <h1 class="display">Start with a map of how your team sells.</h1>
-      <p class="lede">Get a plan your RevOps team can build. Implementation is scoped separately.</p>
+      <h1 class="display">Start with a map of how your team works.</h1>
+      <p class="lede">Map the steps across marketing and sales, including what happens in HubSpot or your existing tools. Get a plan your RevOps team can build. Implementation is scoped separately.</p>
       <div class="cta-row" style="margin-top:36px">
         <a class="btn btn-signal" href={SITE.bookingUrl} target="_blank" rel="noopener" data-cta="services-hero">Book a 30-minute call</a>
       </div>
@@ -24,6 +24,7 @@ const faqs = [
 
   {services.map((s, i) => (
     <section class={`band ${['band-white', 'band-graphite', 'band-light', 'band-black'][i % 4]}`} id={s.slug}>
+      {s.slug === 'sales-coaching' && <span id="sdr-coaching" aria-hidden="true"></span>}
       <div class="wrap svc svc-page">
         <div>
           <p class="svc-tag">{s.tag}</p>

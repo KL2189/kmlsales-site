@@ -3,7 +3,7 @@ import Base from '../layouts/Base.astro';
 import LeadForm from '../components/LeadForm.astro';
 import { SITE } from '../config';
 ---
-<Base title="Contact" description="Book a 30-minute call with KML Sales or send a message about your sales process, outbound motion, or automation plans.">
+<Base title="Contact" description="Book a 30-minute call with KML Sales or send a message about your marketing and sales workflows or automation plans.">
   <section class="page-hero grain band-black" style="padding-bottom:40px">
     <div class="hero-bg" aria-hidden="true"></div>
     <div class="wrap load-in">
@@ -15,7 +15,7 @@ import { SITE } from '../config';
     <div class="wrap contact-grid">
       <div class="panel panel-signal grain" style="position:relative">
         <h2 class="h3">Book a 30-minute call</h2>
-        <p class="muted" style="margin:16px 0 24px">Bring one task that slows your reps down. We’ll discuss what happens today and whether a process map is the right next step.</p>
+        <p class="muted" style="margin:16px 0 24px">Bring one task that slows your team down. We’ll discuss what happens today and whether a process map is the right next step.</p>
         <a class="btn btn-signal" href={SITE.bookingUrl} target="_blank" rel="noopener" data-cta="contact-book">Book a call</a>
         <p class="cta-note">Or email <a href={`mailto:${SITE.email}`}>{SITE.email}</a></p>
       </div>
@@ -27,7 +27,7 @@ import { SITE } from '../config';
   </section>
   <script is:inline>
     (function () {
-      var map = { 'process-map': 'Process map and automation plan', 'automation-build': 'Automation build', 'outbound-system': 'Building or rebuilding outbound / SDR', 'sdr-coaching': 'Coaching for SDR leaders' };
+      var map = { 'process-map': 'GTM workflow map and automation plan', 'automation-build': 'Automation build', 'outbound-system': 'Building or rebuilding outbound', 'sales-coaching': 'Sales leadership coaching', 'sdr-coaching': 'Sales leadership coaching' };
       var s = new URLSearchParams(location.search).get('service'); var el = document.getElementById('f-svc');
       if (s && map[s] && el) el.value = map[s];
     })();

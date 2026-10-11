@@ -17,9 +17,9 @@ const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" v
 </defs>
 <rect width="1200" height="630" fill="#000"/><rect width="1200" height="630" fill="url(#c)"/><rect width="1200" height="630" fill="url(#a)"/><rect width="1200" height="630" fill="url(#b)"/>
 <g transform="translate(60 44) scale(.32)">${logo}</g>
-${line(300, 'Your reps should know')}${line(378, 'what happens next.')}
+${line(300, 'Your team should know')}${line(378, 'what happens next.')}
 <rect x="80" y="510" width="120" height="4" rx="2" fill="url(#s)"/>
-<text x="80" y="566" font-family="Inter" font-size="26" fill="#bdbdbd">Sales process design for SDR teams.  kmlsales.com</text>
+<text x="80" y="566" font-family="Inter" font-size="26" fill="#bdbdbd">Go-to-market workflow design.  kmlsales.com</text>
 </svg>`;
 
 const png = new Resvg(svg, { font: { fontFiles: files, loadSystemFonts: files.length === 0, defaultFontFamily: 'Inter' }, fitTo: { mode: 'width', value: 1200 } }).render().asPng();

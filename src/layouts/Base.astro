@@ -4,7 +4,7 @@ import '../styles/immersive.css';
 import { SITE } from '../config';
 interface Props { title?: string; description?: string; path?: string; type?: string; jsonld?: object; }
 const { title, description = SITE.description, type = 'website', jsonld } = Astro.props;
-const fullTitle = title ? `${title} | KML Sales` : 'KML Sales | Sales process design for SDR teams';
+const fullTitle = title ? `${title} | KML Sales` : 'KML Sales | Go-to-market workflow design';
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
 const current = Astro.url.pathname.replace(/\/$/, '') || '/';
 const nav = [
@@ -18,7 +18,7 @@ const org = {
   email: SITE.email, description: SITE.description, logo: 'https://kmlsales.com/brand/kml-stacked-white.svg',
   founder: { '@type': 'Person', name: 'Keith' },
   areaServed: 'Worldwide',
-  serviceType: ['Sales process mapping and automation planning', 'Sales automation build', 'Outbound and SDR system build', 'SDR leadership coaching'],
+  serviceType: ['GTM workflow mapping and automation planning', 'Marketing and sales automation build', 'Outbound system build', 'Sales leadership coaching'],
 };
 ---
 <!doctype html>
@@ -65,7 +65,7 @@ const org = {
       <div class="foot-grid">
         <div>
           <img src="/brand/kml-stacked-white.svg" alt="KML Sales Fundamentals" width="210" height="101" />
-          <p class="muted" style="max-width:34ch;margin-top:16px">Sales process design for SDR teams.</p>
+          <p class="muted" style="max-width:34ch;margin-top:16px">Go-to-market workflow design.</p>
         </div>
         <div>
           <h4>Site</h4>
@@ -73,7 +73,7 @@ const org = {
         </div>
         <div>
           <h4>Newsletter</h4>
-          <p class="muted" style="margin:0 0 14px;font-size:.95rem">Notes on sales process and automation. Unsubscribe anytime.</p>
+          <p class="muted" style="margin:0 0 14px;font-size:.95rem">Practical notes on GTM workflows and automation. Unsubscribe anytime.</p>
           <form class="foot-form" name="newsletter" method="POST" action="/" data-netlify="true" netlify-honeypot="bot-field" data-ajax data-ok="You’re subscribed.">
             <input type="hidden" name="form_kind" value="newsletter" />
   <input type="hidden" name="submission_id" value="" />

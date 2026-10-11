@@ -10,9 +10,9 @@ const posts = (await getCollection('blog')).sort((a,b) => b.data.date.valueOf() 
 <Base>
   <section class="immersive-hero" aria-labelledby="hero-title">
     <div class="wrap hero-copy">
-      <p class="eyebrow">Sales process design for SDR teams</p>
-      <h1 id="hero-title">Your reps should know<br class="desktop-break" /> what happens next.</h1>
-      <p class="hero-description">KML maps how your team sells and turns the decisions into a plan your RevOps team can build.</p>
+      <p class="eyebrow">Go-to-market workflows for marketing and sales</p>
+      <h1 id="hero-title">Your team should know<br class="desktop-break" /> what happens next.</h1>
+      <p class="hero-description">KML maps how work moves between marketing and sales, then turns the decisions into a plan your team can build in HubSpot and the tools you already use.</p>
       <div class="cta-row"><a class="btn btn-signal" href={SITE.bookingUrl} target="_blank" rel="noopener">Book a 30-minute call <span aria-hidden="true">↗</span></a><a class="btn btn-ghost" href="#example">Explore a process <span aria-hidden="true">↓</span></a></div>
       <p class="scope-note">Implementation is scoped separately.</p>
     </div>
@@ -27,14 +27,14 @@ const posts = (await getCollection('blog')).sort((a,b) => b.data.date.valueOf() 
     <div class="section-heading"><div><p class="eyebrow">Start with the work your team has to chase</p><h2 class="h2">Where does the work stop?</h2></div></div>
     <div class="problem-grid">
       <article><span class="problem-marker" aria-hidden="true">01 /</span><h3>A buyer is waiting for a reply.</h3><p>If a request changes hands and nobody contacts the buyer, define who acts next and when a manager gets notified.</p><a class="text-link" href="#example">Explore the example <span aria-hidden="true">↗</span></a></article>
-      <article><span class="problem-marker" aria-hidden="true">02 /</span><h3>A rep is still copying account details.</h3><p>If reps move the same information between tools, identify what software can handle and what a rep needs to check.</p><a class="text-link" href="/services#process-map">See the design work <span aria-hidden="true">↗</span></a></article>
-      <article><span class="problem-marker" aria-hidden="true">03 /</span><h3>A booked meeting needs more context.</h3><p>If the account executive has to ask what the buyer needs, define what the SDR records before passing the meeting over.</p><a class="text-link" href="/services#outbound-system">Explore outbound design <span aria-hidden="true">↗</span></a></article>
+      <article><span class="problem-marker" aria-hidden="true">02 /</span><h3>Your team is still copying data between tools.</h3><p>If your team moves the same information between forms, spreadsheets, and your CRM, define what software can handle and what a person needs to check.</p><a class="text-link" href="/services#process-map">See the design work <span aria-hidden="true">↗</span></a></article>
+      <article><span class="problem-marker" aria-hidden="true">03 /</span><h3>Sales can’t see what brought the buyer in.</h3><p>If campaign context disappears when a lead reaches sales, define which details move with the record and who acts on them.</p><a class="text-link" href="/services#process-map">Explore workflow design <span aria-hidden="true">↗</span></a></article>
     </div>
   </div></section>
   <ProcessExplorer />
   <section class="band" id="services"><div class="wrap">
-    <div class="section-heading"><div><p class="eyebrow">What you get</p><h2 class="h2">Start with one sales process.</h2></div><p class="muted">Your builder gets the rules, required data, and checks for completion.</p></div>
-    <div class="deliverable-layout"><div class="offer-summary"><span class="svc-tag">Start here</span><h3>Sales process map<br />+ build plan</h3><p>Your RevOps team can implement the design. KML implementation and support are scoped separately.</p><a class="btn btn-signal" href="/contact?service=process-map">Discuss a process map <span aria-hidden="true">↗</span></a></div><div class="deliverables">
+    <div class="section-heading"><div><p class="eyebrow">What you get</p><h2 class="h2">Start with one GTM workflow.</h2></div><p class="muted">Your builder gets the rules, required data, and checks for completion.</p></div>
+    <div class="deliverable-layout"><div class="offer-summary"><span class="svc-tag">Start here</span><h3>GTM workflow map<br />+ build plan</h3><p>Your RevOps team can implement the design. KML implementation and support are scoped separately.</p><a class="btn btn-signal" href="/contact?service=process-map">Discuss a process map <span aria-hidden="true">↗</span></a></div><div class="deliverables">
       <details open><summary><span>01</span> Process map</summary><p>The steps from the first request to the completed action, with a person responsible for each step.</p></details>
       <details><summary><span>02</span> Build specification</summary><p>The data required and the rules for each decision, including where a person must review the work.</p></details>
       <details><summary><span>03</span> Failure handling</summary><p>What happens when data is missing or an action fails, who resolves it, and where the process resumes.</p></details>
@@ -42,7 +42,7 @@ const posts = (await getCollection('blog')).sort((a,b) => b.data.date.valueOf() 
     </div></div>
     <div class="other-services"><p class="eyebrow">Other ways to work together</p><div>{services.slice(1).map(s=><a href={`/services#${s.slug}`}><span>{s.name}</span><span aria-hidden="true">↗</span></a>)}</div></div>
   </div></section>
-  <section class="band" id="about"><div class="wrap about-grid"><div><p class="eyebrow">Meet Keith</p><h2 class="h2">Designed around<br />the work reps do.</h2></div><div><p class="about-copy">I’m Keith. I lead SDR teams selling into enterprise and contact center accounts, and I build the tools my reps use.</p><p class="muted">The work starts with how your team sells today. The design makes the next action explicit, including what happens when something goes wrong.</p><a class="text-link" href="/apps">See Tempo, a tool I built for reps <span aria-hidden="true">↗</span></a></div></div></section>
+  <section class="band" id="about"><div class="wrap about-grid"><div><p class="eyebrow">Meet Keith</p><h2 class="h2">Designed around<br />the work your team does.</h2></div><div><p class="about-copy">I’m Keith. My background is in SDR leadership, and I build tools for the people doing the work. KML brings that practical approach to go-to-market workflows across marketing and sales.</p><p class="muted">The work starts with how your team works today, from a campaign response to the next sales conversation. The design makes the next action explicit, including what happens when something goes wrong.</p><a class="text-link" href="/apps">See Tempo, a tool I built for reps <span aria-hidden="true">↗</span></a></div></div></section>
   <section class="band" id="blog"><div class="wrap"><div class="section-heading"><div><p class="eyebrow">From the blog</p><h2 class="h2">How I think about the work.</h2></div><a href="/blog" class="text-link">All posts <span aria-hidden="true">↗</span></a></div><div class="posts">{posts.map(p=><a class="post-row" href={`/blog/${p.id}`}><span class="muted">{p.data.readMinutes ?? 5} min read</span><div><h3>{p.data.title}</h3><p>{p.data.description}</p></div><span aria-hidden="true">↗</span></a>)}</div></div></section>
   <CtaBand />
   <script>
