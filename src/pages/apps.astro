@@ -46,7 +46,9 @@ import { SITE } from '../config';
           <h3>Get new apps first</h3>
           <p>New apps and the KML newsletter. Unsubscribe anytime.</p>
           <form class="inline-form" name="newsletter" method="POST" action="/" data-netlify="true" netlify-honeypot="bot-field" data-ajax data-ok="You’re on the list.">
-            <input type="hidden" name="form-name" value="newsletter" /><input type="hidden" name="source" value="apps" />
+            <input type="hidden" name="form_kind" value="newsletter" />
+  <input type="hidden" name="submission_id" value="" />
+  <input type="hidden" name="form-name" value="newsletter" /><input type="hidden" name="source" value="apps" />
             <p style="position:absolute;left:-9999px"><label>Leave this empty <input name="bot-field" tabindex="-1" autocomplete="off" /></label></p>
             <label for="n-email" class="skip" style="position:absolute;left:-9999px">Email</label>
             <input id="n-email" type="email" name="email" placeholder="you@company.com" autocomplete="email" required />
