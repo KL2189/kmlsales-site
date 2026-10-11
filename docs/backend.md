@@ -1,6 +1,6 @@
 # Contact and newsletter storage
 
-Status: database deployed to Supabase project `ghjfztaaqnwljkigwsio`; server-role writes and deduplication verified in a rolled-back transaction. Netlify secrets, function publication, and browser-to-database verification are pending.
+Status: live as of 2026-10-11. Supabase project `ghjfztaaqnwljkigwsio` and Netlify production deploy `6acb88fe7b01110b1820f91a` are connected. Browser contact, footer newsletter, and Apps newsletter submissions were read back from Supabase. Contact without consent did not subscribe; the same newsletter email submitted from both locations produced one subscriber. Seven local tests, backend type checks, and the static build passed.
 
 ## Flow
 
@@ -22,7 +22,7 @@ Netlify remains the intake record. Supabase holds structured inquiries and newsl
 
 1. Create the approved `kmlsales-site` project in the KML Sales organization. Confirm any cost before accepting a paid plan.
 2. Apply `supabase/migrations/*_website_submissions.sql` to that project.
-3. Set `SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY` on the exact Netlify `kmlsales` site, production context and Functions scope. Mark the key secret. Redeploy after environment changes.
+3. Set `SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY` on the exact Netlify `kmlsales` site, production context. Mark the key secret. The current Netlify plan locks scope selection; the key is available to Builds, Functions, and Runtime, but never exposed through a PUBLIC_ variable or client code. Redeploy after environment changes.
 4. Publish this branch only when configuration is ready.
 5. Submit clearly labeled synthetic test contact and newsletter entries through the deployed browser forms. Read them back from both Netlify and Supabase. Verify contact without consent does not subscribe, checkbox consent does subscribe, duplicate email does not duplicate, and existing opt-out stays opted out.
 6. Check database grants and Supabase security advisors. Verify anonymous reads/writes cannot access either private table or invoke the RPC.
