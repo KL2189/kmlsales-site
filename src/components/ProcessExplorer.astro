@@ -1,0 +1,43 @@
+<section class="band process-section" id="example" aria-labelledby="process-title">
+  <div class="wrap">
+    <div class="section-heading"><div><p class="eyebrow">See the decisions behind the process</p><h2 class="h2" id="process-title">A request is assigned.<br />Did anyone contact the buyer?</h2></div><p class="muted">Explore an example from the first request to a confirmed action. Then see what happens when that action is missing.</p></div>
+    <div class="explorer" data-explorer>
+      <div class="explorer-toolbar"><span class="example-label">Illustrative example · Demo request</span><div class="scenario-controls" aria-label="Choose a scenario"><button type="button" data-scenario="normal" aria-pressed="true">Expected path</button><button type="button" data-scenario="missed" aria-pressed="false">No contact recorded</button></div></div>
+      <div class="process-track" aria-label="Explore process steps">
+        {['Request received', 'Assign the rep', 'Contact the buyer', 'Verify the action'].map((label, i) => <button type="button" class="process-step" data-step={i} aria-pressed={i === 0 ? 'true' : 'false'} aria-controls="step-detail"><span class="step-number">0{i + 1}</span><span>{label}</span><span aria-hidden="true" class="step-arrow">↗</span></button>)}
+      </div>
+      <div id="step-detail" class="step-detail" aria-live="polite" aria-atomic="true"><div><p class="eyebrow" data-step-kind>Required information</p><h3 data-step-title>Start with a request someone can act on.</h3></div><div><p data-step-body>The record needs the buyer’s contact details and the reason they asked to speak. Missing information goes to a named person for review.</p><p class="detail-rule" data-step-rule>Define the required fields before the process moves forward.</p></div></div>
+      <div class="recovery" data-recovery hidden><span class="recovery-mark" aria-hidden="true">↳</span><div><h3>A notification is not the finish line.</h3><p>If no contact is recorded by the agreed deadline, notify the manager. The manager assigns the next action, then the process returns to the contact check.</p><button type="button" class="text-link" data-resume>Return to the contact check <span aria-hidden="true">↗</span></button></div></div>
+      <p class="example-disclaimer">Example design only. Timing, data access, and responsibilities are agreed before implementation.</p>
+    </div>
+  </div>
+</section>
+<script>
+  const explorer = document.querySelector<HTMLElement>('[data-explorer]');
+  if (explorer) {
+    const steps = [
+      ['Required information', 'Start with a request someone can act on.', 'The record needs the buyer’s contact details and the reason they asked to speak. Missing information goes to a named person for review.', 'Define the required fields before the process moves forward.'],
+      ['Decision rule', 'Make the next person responsible explicit.', 'Use the agreed assignment rules to select the rep. If no rule matches, send the request to the person responsible for resolving it.', 'An unmatched request needs an owner, not a silent failure.'],
+      ['Human action', 'The rep contacts the buyer.', 'The assigned rep uses the request context to call or email the buyer. The design specifies which activity needs to be recorded.', 'Assignment alone does not show that the buyer was contacted.'],
+      ['Acceptance check', 'Check the action, not just the assignment.', 'Compare the request with the recorded call or email. If contact is recorded, this step is complete. Otherwise, follow the agreed escalation rule.', 'Completion requires evidence that the expected action happened.'],
+    ];
+    let scenario = 'normal';
+    const selectStep = (index: number) => {
+      explorer.querySelectorAll<HTMLButtonElement>('[data-step]').forEach(b => b.setAttribute('aria-pressed', String(Number(b.dataset.step) === index)));
+      ['kind','title','body','rule'].forEach((key,i) => { const el = explorer.querySelector(`[data-step-${key}]`); if(el) el.textContent = steps[index][i]; });
+      explorer.querySelector<HTMLElement>('[data-recovery]')!.hidden = scenario !== 'missed';
+    };
+    explorer.querySelectorAll<HTMLButtonElement>('[data-step]').forEach(b => b.addEventListener('click', () => selectStep(Number(b.dataset.step))));
+    explorer.querySelectorAll<HTMLButtonElement>('[data-scenario]').forEach(b => b.addEventListener('click', () => {
+      scenario = b.dataset.scenario!;
+      explorer.querySelectorAll<HTMLButtonElement>('[data-scenario]').forEach(s => s.setAttribute('aria-pressed', String(s === b)));
+      selectStep(scenario === 'missed' ? 3 : 0);
+    }));
+    explorer.querySelector('[data-resume]')?.addEventListener('click', () => {
+      selectStep(3);
+      const title = explorer.querySelector('[data-step-title]');
+      if(title) title.textContent = 'Check again after the manager assigns the next action.';
+      explorer.querySelector<HTMLButtonElement>('[data-step="3"]')?.focus({preventScroll:true});
+    });
+  }
+</script>
