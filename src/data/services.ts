@@ -17,7 +17,7 @@ export const services = [
     slug: 'automation-build',
     tag: 'Separately scoped',
     name: 'Automation build',
-    short: 'The map, built into HubSpot or the CRM and marketing tools your team already uses.',
+    short: 'The map, built into the tools you already use.',
     problem: 'Your team still copies campaign and contact details between tools. Automate the repeatable steps and define what needs human review.',
     outcomes: [
       'Form routing and CRM updates based on agreed rules',
