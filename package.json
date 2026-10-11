@@ -4,14 +4,21 @@
   "scripts": {
     "dev": "astro dev",
     "build": "node scripts/og.mjs && astro build",
-    "preview": "astro preview"
+    "preview": "astro preview",
+    "test:backend": "node --experimental-strip-types --test tests/form-storage.test.mts",
+    "check:backend": "tsc -p tsconfig.backend.json"
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.19",
     "@astrojs/sitemap": "^3.7.4",
+    "@netlify/functions": "6.0.2",
     "@resvg/resvg-js": "^2.6.2",
     "astro": "^5.18.2",
     "sharp": "^0.35.5"
   },
-  "type": "module"
+  "type": "module",
+  "devDependencies": {
+    "@types/node": "26.6.5",
+    "typescript": "5.9.3"
+  }
 }

@@ -75,7 +75,9 @@ const org = {
           <h4>Newsletter</h4>
           <p class="muted" style="margin:0 0 14px;font-size:.95rem">Notes on sales process and automation. Unsubscribe anytime.</p>
           <form class="foot-form" name="newsletter" method="POST" action="/" data-netlify="true" netlify-honeypot="bot-field" data-ajax data-ok="You’re subscribed.">
-            <input type="hidden" name="form-name" value="newsletter" /><input type="hidden" name="source" value="footer" />
+            <input type="hidden" name="form_kind" value="newsletter" />
+  <input type="hidden" name="submission_id" value="" />
+  <input type="hidden" name="form-name" value="newsletter" /><input type="hidden" name="source" value="footer" />
             <p style="position:absolute;left:-9999px"><label>Leave this empty <input name="bot-field" tabindex="-1" autocomplete="off" /></label></p>
             <label for="foot-email" style="position:absolute;left:-9999px">Email</label>
             <input id="foot-email" type="email" name="email" placeholder="you@company.com" autocomplete="email" required />
@@ -109,6 +111,8 @@ const org = {
         f.addEventListener('submit', function (e) {
           e.preventDefault();
           var s = f.querySelector('.form-status'), b = f.querySelector('button[type=submit]');
+          var id = f.querySelector('input[name=submission_id]');
+          if (id && !id.value) id.value = crypto.randomUUID();
           var label = b.textContent;
           b.disabled = true; b.textContent = 'Sending…'; s.className = 'form-status'; s.textContent = '';
           fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: new URLSearchParams(new FormData(f)).toString() })

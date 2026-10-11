@@ -7,3 +7,6 @@ public/og.png
 .env
 .env.*
 !.env.example
+
+.netlify/
+supabase/.temp/
