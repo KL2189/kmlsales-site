@@ -5,17 +5,18 @@ import { services } from '../data/services';
 import { SITE } from '../config';
 const faqs = [
   { q: 'How is this different from buying another automation tool?', a: 'An AI tool runs whatever steps you give it. The map decides which steps it should run, so the tool actually gets used.' },
-  { q: 'Who implements the design?', a: 'Your RevOps team can implement the design. KML implementation and support are scoped separately.' },
+  { q: 'Do we need RevOps to build this?', a: 'No. Keith builds it in your tools, and the map and build spec are also available on their own if your team wants to build it.' },
+  { q: 'Who is this for?', a: 'Series A and B SaaS teams hiring their first SDRs or switching on an AI SDR. If you want someone to send cold email for you, an agency is a better fit.' },
   { q: 'Do I need to know what I want before we talk?', a: 'No. The first call finds the one workflow worth fixing first.' },
-  { q: 'How is pricing set?', a: 'Each engagement is scoped and priced after the first call, before any work starts.' },
+  { q: 'How is pricing set?', a: 'Each engagement is scoped and priced after the first call, before any work starts. Ongoing support after launch is priced on its own.' },
 ];
 ---
-<Base title="Services" description="Get a GTM workflow map with decision rules, failure handling, and acceptance checks. Implementation and support are scoped separately.">
+<Base title="Services" description="Outbound and AI sales workflows for Series A and B SaaS. Keith maps how your team sells and builds it in your CRM and sequencing tools.">
   <section class="page-hero grain band-black">
     <div class="hero-bg" aria-hidden="true"></div>
     <div class="wrap load-in">
-      <h1 class="display">Start with a map of how your team works.</h1>
-      <p class="lede">Map the steps across marketing and sales, including what happens in the tools you already use. Get a plan your RevOps team can build. Implementation is scoped separately.</p>
+      <h1 class="display">Start with one workflow your team runs every day.</h1>
+      <p class="lede">Keith maps how it works today and builds the new version in the tools you already pay for. You don’t need a RevOps hire to get it live.</p>
       <div class="cta-row" style="margin-top:36px">
         <a class="btn btn-signal" href={SITE.bookingUrl} target="_blank" rel="noopener" data-cta="services-hero">Book a 30-minute call</a>
       </div>

@@ -62,6 +62,6 @@ The process example shows the expected path and the recovery path when no contac
 
 Approved logos and local Inter and Libre Baskerville fonts live in `public/`. Font licenses are included. The social share image is generated during the build.
 
-The design distinguishes GTM workflow design from separately scoped implementation. Contact, newsletter, and app notification forms retain Netlify Forms integration. Local testing does not verify delivery through Netlify.
+The copy targets Series A and B SaaS teams building outbound or switching on an AI SDR, with Keith mapping and building the workflow. Contact, newsletter, and app notification forms retain Netlify Forms integration. Local testing does not verify delivery through Netlify.
 
 For a restricted local environment, run `ASTRO_TELEMETRY_DISABLED=1 npm run build` to disable optional Astro telemetry.

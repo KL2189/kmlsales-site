@@ -4,5 +4,5 @@ export const SITE = {
   email: 'keith@kmlsales.com',
   bookingUrl: 'https://app.reclaim.ai/m/keith-breeze-chat/flexible',
   tempoUrl: 'https://chromewebstore.google.com/detail/tempo-text-expansion-for/ikkihgbcngoonhcadbpaoadfefdecalc',
-  description: 'Go-to-market workflow design for marketing and sales teams. KML maps how work moves between your people and tools, then gives your team a plan to build.',
+  description: 'Outbound and AI sales workflows for Series A and B SaaS. KML maps how your team sells today and builds the system your reps and your AI can run.',
 };

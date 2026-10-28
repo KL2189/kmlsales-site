@@ -470,7 +470,7 @@ body { font-size: 18px; line-height: 1.7; letter-spacing: .003em; }
 .agitate { color: #000; }
 
 /* services page rows */
-.svc-page { border: 0 !important; padding: 0 !important; }
+.svc-page { border: 0 !important; padding: 0 var(--gutter) !important; }
 .svc-page .h2 { font-size: clamp(2rem, 4vw, 3.2rem); }
 .list-title { font: 600 .95rem/1.4 var(--sans); letter-spacing: .01em; margin: 6px 0 22px; opacity: .7; }
 .svc-page ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 18px; }

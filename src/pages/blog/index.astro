@@ -5,12 +5,12 @@ import { getCollection } from 'astro:content';
 const posts = (await getCollection('blog')).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 const fmt = (d: Date) => d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
 ---
-<Base title="Blog" description="Practical notes on go-to-market workflows, sales leadership, and automation.">
+<Base title="Blog" description="Practical notes on building outbound and deciding where AI belongs in it.">
   <section class="page-hero grain band-black">
     <div class="hero-bg" aria-hidden="true"></div>
     <div class="wrap load-in">
       <h1 class="display">Field notes on how GTM work gets done.</h1>
-      <p class="lede">Practical notes on the work between marketing and sales, the tools teams use, and the decisions worth automating.</p>
+      <p class="lede">Practical notes on building outbound and deciding where AI belongs in it.</p>
     </div>
   </section>
   <section class="band band-black" style="padding-top:0">
