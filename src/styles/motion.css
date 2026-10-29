@@ -160,3 +160,34 @@
   .rail-panel *{animation:none!important;transition:none!important}
   .v-packet,.v-orbit,.v-loop-dot{display:none}
 }
+
+/* 10. Pile-up comparison: manual steps fall and stack, the workflow stays clean */
+.pile-title{text-align:center;margin:0 auto 48px;max-width:22ch}
+.pile-compare{display:grid;grid-template-columns:1fr 1fr;border:1px solid #3a3a3a;border-radius:12px;overflow:hidden;min-height:520px}
+.pile-side{position:relative;padding:34px 28px 0;display:flex;flex-direction:column;align-items:center}
+.pile-side h3{font:600 17px/1.4 var(--sans);margin:0;text-align:center}
+.pile-mess{background:radial-gradient(ellipse at 50% 100%,#2a2a2a,#0a0a0a 70%);color:#fff;border-right:1px solid #3a3a3a}
+.pile-clean{background:linear-gradient(180deg,#fff,#e5e5e5);color:#000}
+.pill{display:inline-flex;align-items:center;gap:10px;white-space:nowrap;background:#fff;color:#000;border:1px solid #cfcfcf;border-radius:999px;padding:8px 18px 8px 8px;font:500 15px/1 var(--sans);box-shadow:0 6px 18px #00000040}
+.pill-n{display:inline-grid;place-items:center;width:26px;height:26px;border:1.5px solid #000;border-radius:50%;font-size:12px;flex:none}
+.pile-stack{list-style:none;margin:0;padding:0;position:absolute;inset:90px 0 0 0}
+.pile-stack .pill{position:absolute;left:var(--x);bottom:var(--y);transform:rotate(var(--r));transform-origin:center}
+.motion .pile-stack .pill{opacity:0;transform:translateY(-560px) rotate(calc(var(--r) + 40deg))}
+.motion .go .pile-stack .pill{animation:pile-drop .85s cubic-bezier(.34,1.32,.55,1) both;animation-delay:calc(var(--i) * 320ms)}
+@keyframes pile-drop{0%{opacity:0;transform:translateY(-560px) rotate(calc(var(--r) + 40deg))}25%{opacity:1}100%{opacity:1;transform:translateY(0) rotate(var(--r))}}
+.motion .go .pile-stack .pill:last-child{animation-name:pile-drop,pile-shake;animation-duration:.85s,.5s;animation-delay:calc(var(--i) * 320ms),calc(var(--i) * 320ms + .85s)}
+@keyframes pile-shake{0%,100%{transform:rotate(var(--r))}25%{transform:rotate(calc(var(--r) - 4deg))}75%{transform:rotate(calc(var(--r) + 3deg))}}
+.clean-stack{list-style:none;margin:auto 0;padding:0 0 40px;display:flex;flex-direction:column;align-items:center;gap:16px}
+.pile-clean .pill{font-size:17px;padding:10px 22px 10px 10px;box-shadow:0 1px 0 #00000010;border-color:#d4d4d4}
+.motion .clean-stack .pill{opacity:0;transform:translateY(16px) scale(.96)}
+.motion .go .clean-stack .pill{animation:clean-in .7s cubic-bezier(.2,.7,.2,1) both;animation-delay:calc(3.2s + var(--i) * 260ms)}
+@keyframes clean-in{to{opacity:1;transform:none}}
+@media (max-width:860px){
+  .pile-compare{grid-template-columns:1fr}
+  .pile-mess{border-right:0;border-bottom:1px solid #3a3a3a;min-height:390px}
+  .pile-clean{min-height:300px}
+  .pile-stack{left:-34%;right:-34%;transform:scale(.62);transform-origin:50% 100%}
+  .pile-clean .pill{font-size:15px;white-space:normal;text-align:left}
+  .motion .go .clean-stack .pill{animation-delay:calc(.2s + var(--i) * 220ms)}
+}
+@media (prefers-reduced-motion:reduce){.pile-section .pill{animation:none!important;opacity:1!important}.pile-stack .pill{transform:rotate(var(--r))!important}.clean-stack .pill{transform:none!important}}
