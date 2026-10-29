@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import '../styles/immersive.css';
+import '../styles/motion.css';
 import { SITE } from '../config';
 interface Props { title?: string; description?: string; path?: string; type?: string; jsonld?: object; }
 const { title, description = SITE.description, type = 'website', jsonld } = Astro.props;
@@ -43,6 +44,7 @@ const org = {
   <meta name="twitter:description" content={description} />
   <meta name="twitter:image" content="https://kmlsales.com/og.png" />
   <script type="application/ld+json" set:html={JSON.stringify(jsonld ?? org)} />
+  <script is:inline>if(!matchMedia('(prefers-reduced-motion: reduce)').matches&&'IntersectionObserver' in window)document.documentElement.classList.add('motion');</script>
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
@@ -120,6 +122,48 @@ const org = {
             .then(function () { s.className = 'form-status ok'; s.textContent = f.dataset.ok || 'Sent.'; f.reset(); })
             .catch(function () { s.className = 'form-status err'; s.innerHTML = 'That didn’t go through. Email <a href="mailto:keith@kmlsales.com">keith@kmlsales.com</a> directly.'; })
             .finally(function () { b.disabled = false; b.textContent = label; });
+        });
+      });
+    })();
+  </script>
+  <script is:inline>
+    (function () {
+      if (!document.documentElement.classList.contains('motion')) return;
+      // Hero headline: split into words that rise in one after another
+      var h1 = document.querySelector('.hero-copy h1');
+      if (h1) {
+        h1.setAttribute('aria-label', h1.textContent.replace(/\s+/g, ' ').trim());
+        var i = 0;
+        Array.prototype.slice.call(h1.childNodes).forEach(function (n) {
+          if (n.nodeType !== 3) return;
+          var frag = document.createDocumentFragment();
+          n.textContent.split(/(\s+)/).forEach(function (w) {
+            if (!w) return;
+            if (/^\s+$/.test(w)) { frag.appendChild(document.createTextNode(w)); return; }
+            var s = document.createElement('span'); s.className = 'word'; s.setAttribute('aria-hidden', 'true');
+            s.style.setProperty('--i', i++); s.textContent = w; frag.appendChild(s);
+          });
+          n.parentNode.replaceChild(frag, n);
+        });
+      }
+      // Scroll reveals
+      var groups = ['.section-heading', '.problem-grid article', '.explorer', '.offer-summary', '.deliverables details', '.other-services',
+        '.about-grid > div', '.post-row', '.cta-band', '.svc', '.page-hero .wrap > *', '.faq details', '.app-feature', '.post-body > *'];
+      document.querySelectorAll(groups.join(',')).forEach(function (el) {
+        if (el.closest('.immersive-hero')) return;
+        var sibs = Array.prototype.filter.call(el.parentNode.children, function (c) { return c.tagName === el.tagName; });
+        el.style.setProperty('--d', Math.min(sibs.indexOf(el), 5));
+        el.setAttribute('data-reveal', '');
+      });
+      var io = new IntersectionObserver(function (es) {
+        es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+      }, { rootMargin: '0px 0px -8% 0px', threshold: 0.12 });
+      document.querySelectorAll('[data-reveal], .band').forEach(function (el) { io.observe(el); });
+      // Cursor light on problem cards
+      document.querySelectorAll('.problem-grid article').forEach(function (a) {
+        a.addEventListener('pointermove', function (e) {
+          var r = a.getBoundingClientRect();
+          a.style.setProperty('--mx', (e.clientX - r.left) + 'px'); a.style.setProperty('--my', (e.clientY - r.top) + 'px');
         });
       });
     })();

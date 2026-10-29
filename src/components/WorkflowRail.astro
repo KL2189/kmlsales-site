@@ -1,0 +1,178 @@
+---
+import { SITE } from '../config';
+---
+<section class="band rail-section" id="how-it-runs" aria-labelledby="rail-title" data-rail>
+  <div class="rail-sticky">
+    <div class="wrap rail-head">
+      <div>
+        <p class="eyebrow">How a workflow runs</p>
+        <h2 class="h2" id="rail-title">Follow one lead through the system.</h2>
+      </div>
+      <p class="muted">Every step has an owner and a check. Keep scrolling to watch the lead move.</p>
+    </div>
+
+    <div class="rail-viewport">
+      <ol class="rail-track" data-track>
+        <li class="rail-panel" data-panel>
+          <div class="rail-visual" aria-hidden="true">
+            <svg viewBox="0 0 360 220">
+              <rect class="v-card" x="70" y="28" width="220" height="164" rx="10" />
+              <rect class="v-field f1" x="92" y="54" width="176" height="22" rx="4" />
+              <rect class="v-field f2" x="92" y="86" width="176" height="22" rx="4" />
+              <rect class="v-field f3" x="92" y="118" width="120" height="22" rx="4" />
+              <rect class="v-btn" x="92" y="152" width="84" height="24" rx="5" />
+              <text class="v-btn-t" x="134" y="168" text-anchor="middle">Request demo</text>
+              <circle class="v-click" cx="134" cy="164" r="6" />
+              <g class="v-chip"><rect x="196" y="152" width="84" height="24" rx="12" /><text x="238" y="168" text-anchor="middle">Workflow starts</text></g>
+            </svg>
+          </div>
+          <p class="rail-step">01 / Trigger</p>
+          <h3>A buyer asks for a demo.</h3>
+          <p>The form starts the workflow on its own. Nobody has to notice it first.</p>
+        </li>
+
+        <li class="rail-panel" data-panel>
+          <div class="rail-visual" aria-hidden="true">
+            <svg viewBox="0 0 360 220">
+              <g class="v-spokes">
+                <path d="M180 110 L70 46" /><path d="M180 110 L290 46" /><path d="M180 110 L70 174" /><path d="M180 110 L290 174" />
+              </g>
+              <g class="v-sat"><rect x="22" y="32" width="96" height="28" rx="6" /><text x="70" y="50" text-anchor="middle">Industry</text></g>
+              <g class="v-sat"><rect x="242" y="32" width="96" height="28" rx="6" /><text x="290" y="50" text-anchor="middle">Headcount</text></g>
+              <g class="v-sat"><rect x="22" y="160" width="96" height="28" rx="6" /><text x="70" y="178" text-anchor="middle">CRM owner</text></g>
+              <g class="v-sat"><rect x="242" y="160" width="96" height="28" rx="6" /><text x="290" y="178" text-anchor="middle">Open deals</text></g>
+              <g class="v-hub"><rect x="134" y="92" width="92" height="36" rx="8" /><text x="180" y="115" text-anchor="middle">Acme Co.</text></g>
+            </svg>
+          </div>
+          <p class="rail-step">02 / Enrich</p>
+          <h3>Software fills in the account.</h3>
+          <p>The account details and CRM history load before a rep ever opens the lead.</p>
+        </li>
+
+        <li class="rail-panel" data-panel>
+          <div class="rail-visual" aria-hidden="true">
+            <svg viewBox="0 0 360 220">
+              <path class="v-branch" d="M86 110 C150 110 150 44 214 44" />
+              <path class="v-branch v-chosen" d="M86 110 L214 110" />
+              <path class="v-branch" d="M86 110 C150 110 150 176 214 176" />
+              <g class="v-node"><rect x="14" y="94" width="72" height="32" rx="6" /><text x="50" y="114" text-anchor="middle">Lead</text></g>
+              <g class="v-node dim"><rect x="214" y="28" width="122" height="32" rx="6" /><text x="275" y="48" text-anchor="middle">Enterprise rep</text></g>
+              <g class="v-node pick"><rect x="214" y="94" width="122" height="32" rx="6" /><text x="275" y="114" text-anchor="middle">Mid-market rep</text></g>
+              <g class="v-node dim"><rect x="214" y="160" width="122" height="32" rx="6" /><text x="275" y="180" text-anchor="middle">Review queue</text></g>
+              <circle class="v-packet" r="5"><animateMotion dur="2.4s" repeatCount="indefinite" path="M86 110 L214 110" /></circle>
+            </svg>
+          </div>
+          <p class="rail-step">03 / Route</p>
+          <h3>Rules choose who acts next.</h3>
+          <p>Every branch is written down. A lead that matches no rule goes to a named person for review.</p>
+        </li>
+
+        <li class="rail-panel" data-panel>
+          <div class="rail-visual" aria-hidden="true">
+            <svg viewBox="0 0 360 220">
+              <rect class="v-layer l3" x="20" y="14" width="320" height="192" rx="18" />
+              <rect class="v-layer l2" x="58" y="40" width="244" height="140" rx="14" />
+              <rect class="v-layer l1" x="96" y="66" width="168" height="88" rx="10" />
+              <rect class="v-core" x="128" y="88" width="104" height="44" rx="8" />
+              <text class="v-core-t" x="180" y="115" text-anchor="middle">AI draft</text>
+              <text class="v-label" x="34" y="34">Rep approval</text>
+              <text class="v-label" x="72" y="58">Message rules</text>
+              <text class="v-label" x="110" y="84">Approved data</text>
+              <circle class="v-orbit" r="4"><animateMotion dur="6s" repeatCount="indefinite" path="M38 14 H322 Q340 14 340 32 V188 Q340 206 322 206 H38 Q20 206 20 188 V32 Q20 14 38 14 Z" /></circle>
+            </svg>
+          </div>
+          <p class="rail-step">04 / Harness</p>
+          <h3>AI drafts inside a harness.</h3>
+          <p>It works only from approved data and your message rules. A rep approves anything that could cost the deal.</p>
+        </li>
+
+        <li class="rail-panel" data-panel>
+          <div class="rail-visual" aria-hidden="true">
+            <svg viewBox="0 0 360 220">
+              <circle class="v-loop" cx="180" cy="110" r="74" />
+              <circle class="v-loop-dot" r="5"><animateMotion dur="4.5s" repeatCount="indefinite" path="M180 36 A74 74 0 1 1 179.9 36" /></circle>
+              <g class="v-loop-node"><rect x="128" y="20" width="104" height="30" rx="15" /><text x="180" y="39" text-anchor="middle">Rep follows up</text></g>
+              <g class="v-loop-node"><rect x="236" y="134" width="104" height="30" rx="15" /><text x="288" y="153" text-anchor="middle">Check the log</text></g>
+              <g class="v-loop-node alert"><rect x="20" y="134" width="104" height="30" rx="15" /><text x="72" y="153" text-anchor="middle">Alert manager</text></g>
+              <text class="v-center" x="180" y="106" text-anchor="middle">Loops until</text>
+              <text class="v-center" x="180" y="122" text-anchor="middle">the buyer hears back</text>
+            </svg>
+          </div>
+          <p class="rail-step">05 / Verify</p>
+          <h3>Then it checks the work happened.</h3>
+          <p>If no call is logged in two hours, the manager gets an alert. The loop keeps running until the buyer hears back.</p>
+        </li>
+
+        <li class="rail-panel rail-end" data-panel>
+          <div class="rail-visual" aria-hidden="true">
+            <svg viewBox="0 0 360 220">
+              <rect class="v-card" x="60" y="22" width="240" height="176" rx="10" />
+              <line class="v-cal-line" x1="60" y1="56" x2="300" y2="56" />
+              <text class="v-cal-h" x="80" y="44">Thursday</text>
+              <rect class="v-slot" x="80" y="70" width="200" height="26" rx="5" />
+              <rect class="v-slot booked" x="80" y="104" width="200" height="34" rx="5" />
+              <text class="v-booked-t" x="96" y="126">Acme Co. · Discovery call</text>
+              <rect class="v-slot" x="80" y="146" width="200" height="26" rx="5" />
+            </svg>
+          </div>
+          <p class="rail-step">06 / Booked</p>
+          <h3>The meeting lands on the calendar.</h3>
+          <p>Every handoff left a record, so you can see where the next lead would stall.</p>
+          <a class="btn btn-signal" href={SITE.bookingUrl} target="_blank" rel="noopener" data-cta="rail">Map your first workflow <span aria-hidden="true">↗</span></a>
+        </li>
+      </ol>
+    </div>
+
+    <div class="wrap rail-progress" aria-hidden="true">
+      <div class="rail-bar"><span class="rail-fill"></span><span class="rail-dot"></span></div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const section = document.querySelector<HTMLElement>('[data-rail]');
+  if (section) {
+    const track = section.querySelector<HTMLElement>('[data-track]')!;
+    const panels = Array.from(section.querySelectorAll<HTMLElement>('[data-panel]'));
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const wide = window.matchMedia('(min-width: 960px)');
+    let pinned = false, distance = 0;
+
+    const layout = () => {
+      pinned = wide.matches && !reduce.matches;
+      section.classList.toggle('pinned', pinned);
+      if (pinned) {
+        const last = panels[panels.length - 1];
+        const vw = track.parentElement!.clientWidth;
+        distance = Math.max(0, last.offsetLeft + last.offsetWidth - vw + Math.max(48, vw * 0.08));
+        section.style.height = `${window.innerHeight + distance}px`;
+      } else {
+        section.style.height = '';
+        track.style.transform = '';
+      }
+      update();
+    };
+
+    const light = (el: HTMLElement) => el.classList.add('live');
+
+    const update = () => {
+      if (!pinned) return;
+      const top = section.getBoundingClientRect().top;
+      const p = Math.min(1, Math.max(0, -top / Math.max(1, distance)));
+      track.style.transform = `translate3d(${-p * distance}px,0,0)`;
+      section.style.setProperty('--p', String(p));
+      const mid = window.innerWidth * 0.62;
+      panels.forEach(el => { if (p > 0.97 || el.getBoundingClientRect().left < mid) light(el); });
+    };
+
+    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting && !pinned) light(e.target as HTMLElement); }), { threshold: 0.35 });
+    panels.forEach(el => io.observe(el));
+
+    window.addEventListener('scroll', () => requestAnimationFrame(update), { passive: true });
+    window.addEventListener('resize', layout);
+    wide.addEventListener('change', layout);
+    reduce.addEventListener('change', layout);
+    layout();
+    if (reduce.matches || !('IntersectionObserver' in window)) panels.forEach(light);
+  }
+</script>

@@ -5,6 +5,7 @@
       <div class="explorer-toolbar"><span class="example-label">Illustrative example · Demo request</span><div class="scenario-controls" aria-label="Choose a scenario"><button type="button" data-scenario="normal" aria-pressed="true">Expected path</button><button type="button" data-scenario="missed" aria-pressed="false">No contact recorded</button></div></div>
       <div class="process-track" aria-label="Explore process steps">
         {['Request received', 'Assign the rep', 'Contact the buyer', 'Verify the action'].map((label, i) => <button type="button" class="process-step" data-step={i} aria-pressed={i === 0 ? 'true' : 'false'} aria-controls="step-detail"><span class="step-number">0{i + 1}</span><span>{label}</span><span aria-hidden="true" class="step-arrow">↗</span></button>)}
+        <span class="process-progress" aria-hidden="true"></span>
       </div>
       <div id="step-detail" class="step-detail" aria-live="polite" aria-atomic="true"><div><p class="eyebrow" data-step-kind>Required information</p><h3 data-step-title>Start with a request someone can act on.</h3></div><div><p data-step-body>The record needs the buyer’s contact details and the reason they asked to speak. Missing information goes to a named person for review.</p><p class="detail-rule" data-step-rule>Define the required fields before the process moves forward.</p></div></div>
       <div class="recovery" data-recovery hidden><span class="recovery-mark" aria-hidden="true">↳</span><div><h3>A notification is not the finish line.</h3><p>If no contact is recorded by the agreed deadline, notify the manager. The manager assigns the next action, then the process returns to the contact check.</p><button type="button" class="text-link" data-resume>Return to the contact check <span aria-hidden="true">↗</span></button></div></div>
@@ -26,6 +27,9 @@
       explorer.querySelectorAll<HTMLButtonElement>('[data-step]').forEach(b => b.setAttribute('aria-pressed', String(Number(b.dataset.step) === index)));
       ['kind','title','body','rule'].forEach((key,i) => { const el = explorer.querySelector(`[data-step-${key}]`); if(el) el.textContent = steps[index][i]; });
       explorer.querySelector<HTMLElement>('[data-recovery]')!.hidden = scenario !== 'missed';
+      explorer.querySelector<HTMLElement>('.process-progress')?.style.setProperty('--p', String((index + 1) / steps.length));
+      const detail = explorer.querySelector<HTMLElement>('.step-detail');
+      if (detail) { detail.classList.remove('swap'); void detail.offsetWidth; detail.classList.add('swap'); }
     };
     explorer.querySelectorAll<HTMLButtonElement>('[data-step]').forEach(b => b.addEventListener('click', () => selectStep(Number(b.dataset.step))));
     explorer.querySelectorAll<HTMLButtonElement>('[data-scenario]').forEach(b => b.addEventListener('click', () => {
