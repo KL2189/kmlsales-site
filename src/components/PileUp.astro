@@ -1,0 +1,49 @@
+---
+// Left: manual steps fall and pile up. Right: the written workflow, three clean steps.
+// x = left edge (% of panel width), y = bottom offset (px), r = resting rotation (deg).
+const mess = [
+  { t: 'Demo request lands', x: 30, y: 0, r: 0 },
+  { t: 'Nobody owns it', x: 48, y: 48, r: -2 },
+  { t: 'Rep digs through LinkedIn', x: 15, y: 84, r: -12 },
+  { t: 'Copy a template from Slack', x: 46, y: 124, r: 9 },
+  { t: 'AI drafts the wrong pitch', x: 22, y: 160, r: -15 },
+  { t: 'Manager asks for an update', x: 26, y: 222, r: -9 },
+  { t: 'Wait', x: 9, y: 150, r: -82 },
+  { t: 'Buyer goes cold', x: 72, y: 200, r: 68 },
+  { t: 'Fire drill at QBR', x: 14, y: 300, r: -13 },
+];
+const clean = ['A lead comes in', 'The workflow routes and drafts it', 'A rep approves and books'];
+---
+<section class="band pile-section" id="without-a-system" aria-labelledby="pile-title">
+  <div class="wrap">
+    <h2 class="h2 pile-title" id="pile-title">Stop running outbound from memory.</h2>
+    <div class="pile-compare" data-pile>
+      <div class="pile-side pile-mess">
+        <h3>Outbound without a system</h3>
+        <ol class="pile-stack" aria-label="Steps without a system">
+          {mess.map((m, i) => (
+            <li class="pill" style={`--x:${m.x}%;--y:${m.y}px;--r:${m.r}deg;--i:${i}`}><span class="pill-n">{i + 1}</span>{m.t}</li>
+          ))}
+        </ol>
+      </div>
+      <div class="pile-side pile-clean">
+        <h3>With a written workflow</h3>
+        <ol class="clean-stack" aria-label="Steps with a written workflow">
+          {clean.map((c, i) => <li class="pill" style={`--i:${i}`}><span class="pill-n">{i + 1}</span>{c}</li>)}
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const pile = document.querySelector<HTMLElement>('[data-pile]');
+  if (pile) {
+    const go = () => pile.classList.add('go');
+    if (!('IntersectionObserver' in window) || matchMedia('(prefers-reduced-motion: reduce)').matches) go();
+    else {
+      const io = new IntersectionObserver(es => { if (es[0].isIntersecting) { go(); io.disconnect(); } }, { threshold: 0.45 });
+      io.observe(pile);
+    }
+  }
+</script>
