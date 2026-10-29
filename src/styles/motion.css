@@ -66,3 +66,97 @@
   .motion .hero-copy *,.motion .signal-scene,.motion [data-reveal],.cta-band::before,.step-detail.swap>*,.recovery,.deliverables p{animation:none!important;opacity:1!important;transform:none!important;filter:none!important;transition:none!important}
   .motion .band::before{transform:scaleX(1);transition:none}
 }
+
+/* 9. Workflow rail: the section pins and the lead travels left to right */
+.rail-section{padding:90px 0 60px}
+.rail-head{display:flex;justify-content:space-between;align-items:end;gap:36px;margin-bottom:44px}
+.rail-head>p{max-width:34ch;margin:0}
+.rail-viewport{overflow:hidden}
+.rail-section{--gap:96px;--panel:min(420px,82vw)}
+.rail-track{list-style:none;margin:0;padding:0 calc(var(--gutter) + 6vw) 0 var(--gutter);display:flex;gap:var(--gap);will-change:transform}
+.rail-panel{position:relative;flex:0 0 var(--panel);display:flex;flex-direction:column;align-items:start}
+.rail-panel:not(:last-child) .rail-visual::after{content:'';position:absolute;top:50%;right:calc(-1 * var(--gap) - 1px);width:var(--gap);height:1px;background:repeating-linear-gradient(90deg,#a0a0a0 0 6px,transparent 6px 12px);background-size:24px 1px;opacity:.25;transition:opacity .6s}
+.rail-panel.live:not(:last-child) .rail-visual::after{opacity:1;animation:flow 1.2s linear infinite}
+@keyframes flow{to{background-position:24px 0}}
+.rail-visual{position:relative;width:100%;aspect-ratio:360/236;border:1px solid #2a2a2a;border-radius:12px;background:radial-gradient(ellipse at 50% 0%,#ffffff0d,transparent 65%),#050505;margin-bottom:26px;transition:border-color .6s}
+.rail-panel.live .rail-visual{border-color:#4a4a4a}
+.rail-visual svg{width:100%;height:100%;display:block;overflow:visible}
+.rail-visual text{font:500 11px var(--sans);fill:#b9b9b9}
+.rail-step{font:500 11px/1.6 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:#a0a0a0;margin:0 0 12px}
+.rail-panel h3{font-size:24px;line-height:1.35;margin:0 0 12px;color:#fff}
+.rail-panel>p:not(.rail-step){color:#b9b9b9;font-size:15px;line-height:1.75;margin:0 0 22px;max-width:40ch}
+.rail-progress{margin-top:40px}
+.rail-bar{position:relative;height:1px;background:#222}
+.rail-fill{position:absolute;inset:0 auto 0 0;width:calc(var(--p,0) * 100%);background:linear-gradient(90deg,#3a3a3a,#fff)}
+.rail-dot{position:absolute;top:-3px;left:calc(var(--p,0) * 100% - 3px);width:7px;height:7px;border-radius:50%;background:#fff;box-shadow:0 0 12px #fff}
+.rail-section:not(.pinned) .rail-progress{display:none}
+
+/* Pinned layout on wide screens */
+.rail-section.pinned{padding:0}
+.rail-section.pinned .rail-sticky{position:sticky;top:64px;height:calc(100vh - 64px);display:flex;flex-direction:column;justify-content:center;overflow:clip}
+.rail-section.pinned .rail-head{margin-bottom:36px}
+
+/* Stacked layout on phones and for reduced motion */
+.rail-section:not(.pinned) .rail-track{flex-direction:column;gap:56px;transform:none!important}
+.rail-section:not(.pinned) .rail-panel{flex-basis:auto;width:100%;max-width:560px}
+.rail-section:not(.pinned) .rail-visual::after{display:none}
+@media (max-height:900px){.rail-section{--panel:360px;--gap:80px}.rail-section.pinned .rail-head{margin-bottom:24px}.rail-section.pinned .rail-head .h2{font-size:clamp(28px,2.8vw,38px)}.rail-section.pinned .rail-progress{margin-top:24px}.rail-panel h3{font-size:21px}.rail-visual{margin-bottom:18px}}
+
+/* Shared visual pieces */
+.v-card{fill:#0b0b0b;stroke:#3a3a3a}
+.v-field{fill:#141414;stroke:#2a2a2a}
+.v-btn{fill:#fff}.v-btn-t{fill:#000!important;font-size:10px!important}
+.v-click{fill:none;stroke:#fff;opacity:0}
+.v-chip rect{fill:#000;stroke:#fff}.v-chip text{fill:#fff!important;font-size:10px!important}
+.v-chip{opacity:0;transform:translateX(-10px);transition:opacity .5s .9s,transform .5s .9s}
+.live .v-chip{opacity:1;transform:none}
+.live .v-click{animation:click 2.4s ease-out .4s infinite}
+@keyframes click{0%{opacity:.9;r:4}60%{opacity:0;r:22}100%{opacity:0}}
+.live .v-field{animation:fill-in .5s ease both}.live .f2{animation-delay:.15s}.live .f3{animation-delay:.3s}
+@keyframes fill-in{from{fill:#000}to{fill:#141414}}
+
+.v-spokes path{fill:none;stroke:#fff;stroke-width:1;stroke-dasharray:140;stroke-dashoffset:140;opacity:.7;transition:stroke-dashoffset .9s cubic-bezier(.2,.7,.2,1)}
+.live .v-spokes path{stroke-dashoffset:0}
+.live .v-spokes path:nth-child(2){transition-delay:.15s}.live .v-spokes path:nth-child(3){transition-delay:.3s}.live .v-spokes path:nth-child(4){transition-delay:.45s}
+.v-sat rect{fill:#0b0b0b;stroke:#3a3a3a}
+.v-sat{opacity:0;transition:opacity .5s}
+.live .v-sat{opacity:1}.live .v-sat:nth-of-type(2){transition-delay:.25s}.live .v-sat:nth-of-type(3){transition-delay:.4s}.live .v-sat:nth-of-type(4){transition-delay:.55s}.live .v-sat:nth-of-type(5){transition-delay:.7s}
+.v-hub rect{fill:#fff}.v-hub text{fill:#000!important;font-weight:600!important}
+
+.v-branch{fill:none;stroke:#3a3a3a;stroke-width:1.2}
+.v-chosen{stroke:#fff;stroke-dasharray:128;stroke-dashoffset:128;transition:stroke-dashoffset .9s .2s}
+.live .v-chosen{stroke-dashoffset:0}
+.v-node rect{fill:#0b0b0b;stroke:#3a3a3a}
+.v-node.dim{opacity:.5}
+.v-node.pick rect{transition:fill .5s 1s,stroke .5s 1s}
+.live .v-node.pick rect{fill:#fff;stroke:#fff}.live .v-node.pick text{fill:#000;transition:fill .5s 1s}
+.v-packet{fill:#fff;opacity:0;filter:drop-shadow(0 0 6px #fff)}.live .v-packet{opacity:1}
+
+.v-layer{fill:none;stroke:#3a3a3a;stroke-dasharray:6 6;opacity:0;transition:opacity .6s}
+.live .v-layer{opacity:1}.live .l2{transition-delay:.2s}.live .l3{transition-delay:.4s}
+.live .l3{animation:dash 14s linear infinite}
+@keyframes dash{to{stroke-dashoffset:-240}}
+.v-core{fill:#fff}.v-core-t{fill:#000!important;font-weight:600!important}
+.v-label{font-size:9px!important;letter-spacing:.08em;text-transform:uppercase;fill:#8a8a8a!important}
+.v-orbit{fill:#fff;opacity:0;filter:drop-shadow(0 0 6px #fff)}.live .v-orbit{opacity:1}
+
+.v-loop{fill:none;stroke:#3a3a3a;stroke-dasharray:4 6}
+.live .v-loop{animation:dash 10s linear infinite reverse}
+.v-loop-node rect{fill:#0b0b0b;stroke:#4a4a4a}
+.v-loop-node.alert rect{stroke:#fff}
+.v-loop-dot{fill:#fff;opacity:0;filter:drop-shadow(0 0 6px #fff)}.live .v-loop-dot{opacity:1}
+.v-center{font-size:10px!important;fill:#8a8a8a!important}
+
+.v-cal-line{stroke:#2a2a2a}
+.v-cal-h{fill:#fff!important;font-size:12px!important}
+.v-slot{fill:#101010;stroke:#2a2a2a}
+.v-slot.booked{transition:fill .6s .4s,stroke .6s .4s}
+.live .v-slot.booked{fill:#fff;stroke:#fff}
+.v-booked-t{fill:#000!important;opacity:0;transition:opacity .4s .9s;font-weight:600!important}
+.live .v-booked-t{opacity:1}
+
+@media (max-width:959px){.rail-head{flex-direction:column;align-items:start;gap:16px}}
+@media (prefers-reduced-motion:reduce){
+  .rail-panel *{animation:none!important;transition:none!important}
+  .v-packet,.v-orbit,.v-loop-dot{display:none}
+}
