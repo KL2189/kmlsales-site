@@ -4,6 +4,7 @@ import ProcessExplorer from '../components/ProcessExplorer.astro';
 import WorkflowRail from '../components/WorkflowRail.astro';
 import PileUp from '../components/PileUp.astro';
 import TwoHalves from '../components/TwoHalves.astro';
+import ScaleStepper from '../components/ScaleStepper.astro';
 import CtaBand from '../components/CtaBand.astro';
 import { SITE } from '../config';
 import { services } from '../data/services';
@@ -14,8 +15,8 @@ const posts = (await getCollection('blog')).sort((a,b) => b.data.date.valueOf() 
   <section class="immersive-hero" aria-labelledby="hero-title">
     <div class="wrap hero-copy">
       <p class="eyebrow">AI operations for SDR teams at Series A and B SaaS</p>
-      <h1 id="hero-title">Give your reps and your AI<br class="desktop-break" /> the same playbook.</h1>
-      <p class="hero-description">KML builds the playbook your SDR team runs on, from the accounts reps target to the words they send. Then it builds that playbook into your CRM and sequencing tools, so new reps and AI follow it the same way.</p>
+      <h1 id="hero-title">A messy process works at three reps.<br class="desktop-break" /> It breaks at fifteen.</h1>
+      <p class="hero-description">Early on, the founder’s memory covers the gaps. KML builds the playbook and the systems that run it before your next hiring wave, so every rep and every AI agent you add scales a process that works.</p>
       <div class="cta-row"><a class="btn btn-signal" href={SITE.bookingUrl} target="_blank" rel="noopener">Book a 30-minute call <span aria-hidden="true">↗</span></a><a class="btn btn-ghost" href="#example">Explore a process <span aria-hidden="true">↓</span></a></div>
       <p class="scope-note">Set up and built by Keith, who leads SDR teams today.</p>
     </div>
@@ -26,8 +27,9 @@ const posts = (await getCollection('blog')).sort((a,b) => b.data.date.valueOf() 
       <div class="scene-bottom"><a href="#example" class="text-link">See how the decisions connect <span aria-hidden="true">↓</span></a><button type="button" class="motion-control" aria-pressed="false" data-motion>Pause motion</button></div>
     </div>
   </section>
+  <ScaleStepper />
   <section class="band" id="problem"><div class="wrap">
-    <div class="section-heading"><div><p class="eyebrow">When the playbook lives in one person’s head</p><h2 class="h2">Your team waits on whoever has the answers.</h2></div><p class="muted">Each of these gets fixed the same way. Write the process down, then build it so it runs without that person.</p></div>
+    <div class="section-heading"><div><p class="eyebrow">When the playbook lives in one person’s head</p><h2 class="h2">The shortcuts that worked early start costing you meetings.</h2></div><p class="muted">Each of these gets fixed the same way. Write the process down, then build it so it runs without that person.</p></div>
     <div class="problem-grid problem-grid-four">
       <article><span class="problem-marker" aria-hidden="true">01 /</span><h3>Your top SDR gives notice.</h3><p>Their best talk tracks and the buyers about to reply leave with them. The next hire starts with a blank doc.</p><p class="fix"><span>The fix</span>Talk tracks and account plans already live in a shared playbook, inside the tools reps use.</p><a class="text-link" href="/services#outbound-system">See the SDR team build <span aria-hidden="true">↗</span></a></article>
       <article><span class="problem-marker" aria-hidden="true">02 /</span><h3>A new rep asks how to work an inbound lead.</h3><p>Three people give three different answers. Ramp drags while they piece together the real process.</p><p class="fix"><span>The fix</span>One written path from first touch to booked meeting, with a person responsible for each step.</p><a class="text-link" href="/services#process-map">See the workflow map <span aria-hidden="true">↗</span></a></article>
