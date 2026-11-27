@@ -4,6 +4,7 @@ import CtaBand from '../components/CtaBand.astro';
 import { services } from '../data/services';
 import { SITE } from '../config';
 const faqs = [
+  { q: 'Do you only build automation?', a: 'No. Targeting and messaging come first, because automation sends a weak pitch faster. The build follows once the playbook books meetings.' },
   { q: 'How is this different from buying another automation tool?', a: 'An AI tool runs whatever steps you give it. The map decides which steps it should run, so the tool actually gets used.' },
   { q: 'Do we need RevOps to build this?', a: 'No. Keith builds it in your tools, and the map and build spec are also available on their own if your team wants to build it.' },
   { q: 'Who is this for?', a: 'Series A and B SaaS teams hiring their first SDRs or switching on an AI SDR. If you want someone to send cold email for you, an agency is a better fit.' },
@@ -11,12 +12,12 @@ const faqs = [
   { q: 'How is pricing set?', a: 'Each engagement is scoped and priced after the first call, before any work starts. Ongoing support after launch is priced on its own.' },
 ];
 ---
-<Base title="Services" description="Outbound and AI sales workflows for Series A and B SaaS. Keith maps how your team sells and builds it in your CRM and sequencing tools.">
+<Base title="Services" description="AI operations for SDR teams at Series A and B SaaS. Keith sets up targeting and messaging, then builds the process into your CRM and sequencing tools.">
   <section class="page-hero grain band-black">
     <div class="hero-bg" aria-hidden="true"></div>
     <div class="wrap load-in">
-      <h1 class="display">Start with one workflow your team runs every day.</h1>
-      <p class="lede">Keith maps how it works today and builds the new version in the tools you already pay for. You don’t need a RevOps hire to get it live.</p>
+      <h1 class="display">Set up the SDR team and the systems it runs on.</h1>
+      <p class="lede">Keith sets up who your reps target and what they say. Then he builds the process into the tools you already pay for, so you don’t need a RevOps hire to get it live.</p>
       <div class="cta-row" style="margin-top:36px">
         <a class="btn btn-signal" href={SITE.bookingUrl} target="_blank" rel="noopener" data-cta="services-hero">Book a 30-minute call</a>
       </div>

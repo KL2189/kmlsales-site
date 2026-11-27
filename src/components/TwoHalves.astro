@@ -1,0 +1,45 @@
+---
+const team = [
+  { t: 'Target market', d: 'Which accounts and buyers reps work, written as rules a list can be built from.' },
+  { t: 'Messaging', d: 'What reps say to each buyer, tested against replies and booked meetings.' },
+  { t: 'Process', d: 'Every step from first touch to booked meeting, with a person responsible for each one.' },
+  { t: 'Hiring and ramp', d: 'Scorecards for the reps you hire and a plan that gets them booking sooner.' },
+];
+const build = [
+  { t: 'Routing', d: 'A new lead goes to the rep your rules pick, without anyone assigning it by hand.' },
+  { t: 'Research', d: 'Account context gathered before a rep opens the record, so nobody jumps between tabs to find it.' },
+  { t: 'AI drafts', d: 'First drafts written from your messaging, with a rep approving before anything sends.' },
+  { t: 'Activity checks', d: 'The CRM flags a buyer who asked for a demo and hasn’t heard back.' },
+];
+---
+<section class="band halves-section" id="what-i-set-up" aria-labelledby="halves-title">
+  <div class="wrap">
+    <div class="section-heading"><div><p class="eyebrow">What KML sets up</p><h2 class="h2" id="halves-title">Two halves of one SDR operation.</h2></div><p class="muted">A strategy with no build leaves your team with a doc. A build with no strategy automates a pitch nobody tested.</p></div>
+    <div class="halves" data-halves>
+      <div class="half half-team">
+        <p class="half-label">The team</p>
+        <h3>A playbook that books meetings</h3>
+        <ol>{team.map((x, i) => <li style={`--i:${i}`}><strong>{x.t}</strong><span>{x.d}</span></li>)}</ol>
+      </div>
+      <div class="halves-link" aria-hidden="true">
+        <span class="link-line"></span>
+        <span class="link-node">Written<br />playbook</span>
+        <span class="link-line"></span>
+      </div>
+      <div class="half half-build">
+        <p class="half-label">The build</p>
+        <h3>Systems that run it every day</h3>
+        <ol>{build.map((x, i) => <li style={`--i:${i}`}><strong>{x.t}</strong><span>{x.d}</span></li>)}</ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const el = document.querySelector<HTMLElement>('[data-halves]');
+  if (el) {
+    const go = () => el.classList.add('in');
+    if (!('IntersectionObserver' in window)) go();
+    else { const io = new IntersectionObserver(es => { if (es[0].isIntersecting) { go(); io.disconnect(); } }, { threshold: 0.3 }); io.observe(el); }
+  }
+</script>
