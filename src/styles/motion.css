@@ -228,3 +228,38 @@
 .motion .halves-link{opacity:0;transition:opacity 1s ease .2s}.motion .halves.in .halves-link{opacity:1}
 @media (max-width:960px){.halves{grid-template-columns:1fr}.halves-link{flex-direction:row;padding:24px 0}.link-line{height:1px;width:auto;background:linear-gradient(90deg,transparent,#5a5a5a,transparent)}.link-line::after{display:none}.link-node{margin:0 14px}.link-node br{display:none}}
 @media (prefers-reduced-motion:reduce){.link-line::after{display:none}.motion .half li,.motion .halves-link{opacity:1!important;transform:none!important}}
+
+/* 13. Scale stepper: 3 to 30 reps, memory vs foundation */
+.scale-steps{position:relative;display:grid;grid-template-columns:repeat(4,1fr);border:1px solid #2a2a2a;border-radius:999px;padding:4px;margin:0 auto 34px;max-width:560px;background:#060606}
+.scale-steps button{position:relative;z-index:1;appearance:none;border:0;background:none;color:#a0a0a0;font:500 14px/1 var(--sans);padding:12px 0;border-radius:999px;cursor:pointer;transition:color .3s}
+.scale-steps button strong{font-size:17px;margin-right:4px;color:inherit}
+.scale-steps button[aria-selected="true"]{color:#000}
+.scale-meter{position:absolute;top:4px;bottom:4px;left:4px;width:calc((100% - 8px) / 4);border-radius:999px;background:linear-gradient(180deg,#fff,#cfcfcf);transform:translateX(calc(var(--step,0) * 100%));transition:transform .55s cubic-bezier(.3,.7,.2,1)}
+.scale-panels{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.scale-panel{border:1px solid #2a2a2a;border-radius:12px;padding:22px 24px 26px;background:radial-gradient(ellipse at 50% 0%,#ffffff0d,transparent 60%),#050505}
+.scale-base{background:linear-gradient(180deg,#fafafa,#e5e5e5);border-color:#e5e5e5;color:#000}
+.scale-label{font:500 11px/1.6 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:#a0a0a0;margin:0 0 6px}
+.scale-base .scale-label{color:#5a5a5a}
+.scale-panel svg{width:100%;height:auto;display:block;margin:4px 0 14px}
+.scale-copy{margin:0;min-height:3.4em;font-size:16px;line-height:1.7;color:#e5e5e5;animation:swap-in .5s cubic-bezier(.2,.7,.2,1)}
+.scale-base .scale-copy{color:#1a1a1a}
+.scale [data-k]{opacity:0;transition:opacity .6s ease,transform .6s cubic-bezier(.3,1.3,.5,1)}
+.scale [data-k].on{opacity:1}
+.scale .rep{transform-box:fill-box;transform-origin:center;transform:scale(.2)}
+.scale .rep.on{transform:scale(1)}
+.scale-memory .rep{fill:#e5e5e5}
+.scale-memory .tangle line{stroke:#ffffff;stroke-width:.8;stroke-opacity:.35}
+.scale-memory .cross line{stroke:#ffffff;stroke-width:.6;stroke-opacity:.18;stroke-dasharray:3 3}
+.scale-memory .cross line.on{opacity:1;animation:dash 6s linear infinite}
+.founder circle{fill:#000;stroke:#fff;stroke-width:1.2}
+.founder text{font:600 7.5px var(--sans);fill:#fff}
+.founder-glow{fill:#fff;opacity:calc(.04 + var(--n) * .009);transform-box:fill-box;transform-origin:center;transform:scale(calc(1 + var(--n) * .03));transition:opacity .6s,transform .6s}
+.scale[data-step="3"] .founder-glow{animation:strain 1.2s ease-in-out infinite}
+@keyframes strain{50%{opacity:.42}}
+.scale-base .pb{fill:#000}
+.scale-base .pb-t{font:500 10px var(--sans);fill:#fff}
+.scale-base .feed{stroke:#3a3a3a;stroke-width:1}
+.scale-base .rep{fill:#000}
+@media (max-width:860px){.scale-panels{grid-template-columns:1fr}.scale-steps button{font-size:12px}.scale-steps button strong{font-size:15px}}
+@media (prefers-reduced-motion:reduce){.scale [data-k],.scale-meter,.founder-glow{transition:none!important;animation:none!important}}
+.halves-section{overflow-x:clip}

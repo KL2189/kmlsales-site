@@ -1,0 +1,84 @@
+---
+// Deterministic scatter so the "memory" team looks messy but renders the same every build.
+let seed = 7;
+const rand = () => { seed = (seed * 9301 + 49297) % 233280; return seed / 233280; };
+const scatter = Array.from({ length: 30 }, () => {
+  const a = rand() * Math.PI * 2, r = 46 + rand() * 72;
+  return { x: +(180 + Math.cos(a) * r * 1.45).toFixed(1), y: +(124 + Math.sin(a) * r * 0.82).toFixed(1) };
+});
+const grid = Array.from({ length: 30 }, (_, i) => ({ x: 39 + (i % 10) * 31.3, y: 112 + Math.floor(i / 10) * 44 }));
+const steps = [
+  { n: 3, memory: 'The founder answers every question, and it works.', base: 'The playbook gets written while the team is small enough to test it.' },
+  { n: 8, memory: 'Reps start asking each other instead. Three versions of the pitch go out the same week.', base: 'New reps ramp on the written playbook, and the founder stops being the help desk.' },
+  { n: 15, memory: 'Leads sit untouched while reps sort out who owns them. Your AI SDR copies whichever version it finds.', base: 'Routing rules assign every lead, and AI drafts from the same messaging reps use.' },
+  { n: 30, memory: 'Pipeline misses, and nobody can say which step broke. Fixing it now means retraining everyone.', base: 'The weekly report shows which number to fix. Rep 30 runs the same process as rep 3.' },
+];
+---
+<section class="band scale-section" id="scale" aria-labelledby="scale-title">
+  <div class="wrap">
+    <div class="section-heading"><div><p class="eyebrow">What changes as you hire</p><h2 class="h2" id="scale-title">Every rep you add multiplies the process you have.</h2></div><p class="muted">Get it right while the team is small, and every new hire ramps on something that works.</p></div>
+
+    <div class="scale" data-scale style="--n:3">
+      <div class="scale-steps" role="tablist" aria-label="Team size">
+        {steps.map((s, i) => <button type="button" role="tab" aria-selected={i === 0 ? 'true' : 'false'} data-n={s.n} data-i={i}><strong>{s.n}</strong> reps</button>)}
+        <span class="scale-meter" aria-hidden="true"></span>
+      </div>
+
+      <div class="scale-panels">
+        <div class="scale-panel scale-memory">
+          <p class="scale-label">Built on memory</p>
+          <svg viewBox="0 0 360 240" aria-hidden="true">
+            <g class="tangle">{scatter.map((d, i) => <line x1="180" y1="124" x2={d.x} y2={d.y} data-k={i + 1} />)}</g>
+            <g class="cross">{scatter.slice(0, 29).map((d, i) => <line x1={d.x} y1={d.y} x2={scatter[(i * 7 + 3) % 30].x} y2={scatter[(i * 7 + 3) % 30].y} data-k={Math.max(i + 1, ((i * 7 + 3) % 30) + 1)} />)}</g>
+            {scatter.map((d, i) => <circle class="rep" cx={d.x} cy={d.y} r="5" data-k={i + 1} />)}
+            <circle class="founder-glow" cx="180" cy="124" r="22" />
+            <g class="founder"><circle cx="180" cy="124" r="19" /><text x="180" y="127" text-anchor="middle">Founder</text></g>
+          </svg>
+          {steps.map((s, i) => <p class="scale-copy" data-i={i} hidden={i !== 0}>{s.memory}</p>)}
+        </div>
+        <div class="scale-panel scale-base">
+          <p class="scale-label">Built on a foundation</p>
+          <svg viewBox="0 0 360 240" aria-hidden="true">
+            <rect class="pb" x="30" y="30" width="300" height="34" rx="8" />
+            <text class="pb-t" x="180" y="52" text-anchor="middle">Written playbook + the systems that run it</text>
+            {grid.map((d, i) => <line class="feed" x1={d.x} y1="64" x2={d.x} y2={d.y - 6} data-k={i + 1} />)}
+            {grid.map((d, i) => <circle class="rep" cx={d.x} cy={d.y} r="5" data-k={i + 1} />)}
+          </svg>
+          {steps.map((s, i) => <p class="scale-copy" data-i={i} hidden={i !== 0}>{s.base}</p>)}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const root = document.querySelector<HTMLElement>('[data-scale]');
+  if (root) {
+    const tabs = Array.from(root.querySelectorAll<HTMLButtonElement>('[data-n]'));
+    const els = Array.from(root.querySelectorAll<SVGElement>('[data-k]'));
+    let current = 0, timer: number | undefined;
+    const show = (i: number) => {
+      current = i;
+      const n = Number(tabs[i].dataset.n);
+      root.style.setProperty('--n', String(n));
+      root.style.setProperty('--step', String(i));
+      root.dataset.step = String(i);
+      tabs.forEach((t, j) => t.setAttribute('aria-selected', String(j === i)));
+      els.forEach(el => el.classList.toggle('on', Number(el.dataset.k) <= n));
+      root.querySelectorAll<HTMLElement>('.scale-copy').forEach(p => { p.hidden = Number(p.dataset.i) !== i; });
+    };
+    const stop = () => { if (timer) { clearInterval(timer); timer = undefined; } };
+    tabs.forEach((t, i) => t.addEventListener('click', () => { stop(); show(i); }));
+    show(0);
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!reduce && 'IntersectionObserver' in window) {
+      const io = new IntersectionObserver(es => {
+        if (es[0].isIntersecting && !timer && current === 0) {
+          timer = window.setInterval(() => { if (current >= tabs.length - 1) { stop(); return; } show(current + 1); }, 3200);
+          io.disconnect();
+        }
+      }, { threshold: 0.5 });
+      io.observe(root);
+    }
+  }
+</script>
