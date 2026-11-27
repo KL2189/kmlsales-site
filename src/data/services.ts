@@ -30,16 +30,16 @@ export const services = [
   {
     slug: 'outbound-system',
     tag: 'Or',
-    name: 'Outbound build',
-    short: 'For teams hiring their first SDRs, or rebuilding a motion that stopped booking meetings.',
-    problem: 'Your first SDRs are about to start, and the playbook is whatever the founder remembers.',
+    name: 'SDR team build',
+    short: 'For teams hiring their first SDRs, or rebuilding a team that stopped booking meetings.',
+    problem: 'Your first SDRs are about to start, and the playbook is whatever the founder remembers. Decide who reps target and what they say before day one.',
     outcomes: [
-      'Territories and sequences each rep can actually work',
-      'Clear rules for passing qualified conversations to an AE',
+      'A target market written as rules a rep or a list tool can follow',
+      'Messaging for each buyer, tested against replies and booked meetings',
+      'Rules for passing qualified conversations to an AE',
       'One weekly report that shows which number to fix',
-      'The playbook, live in your tools before your reps ramp',
     ],
-    how: 'Built with your team in short sprints.',
+    how: 'Built with your team in short sprints, then loaded into your tools before reps ramp.',
   },
   {
     slug: 'sales-coaching',
@@ -59,5 +59,6 @@ export const services = [
 
 export const alternatives = [
   { name: 'Buy another automation tool', why: 'It runs whatever steps you give it, including the wrong ones. Reps work around it, and it gets cut at renewal.' },
-  { name: 'Hire a consultancy', why: 'You get a slide deck. Your team still has to build everything in it.' },
+  { name: 'Hire a GTM engineer', why: 'They can build anything, and they have never run an SDR team. You get automation for a pitch nobody tested.' },
+  { name: 'Hire an SDR consultant', why: 'You get a playbook in a doc. Someone on your team still has to build it into your tools.' },
 ];
